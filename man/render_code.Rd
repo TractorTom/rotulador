@@ -2,17 +2,19 @@
 % Please edit documentation in R/format_code.R
 \name{render_code}
 \alias{render_code}
-\title{Generate a file with formated code}
+\title{Generate a file with formatted code}
 \usage{
 render_code(
   output = "word",
   browser = getOption("browser"),
   eval = FALSE,
-  font_size = 12
+  font_size = 12,
+  code = TRUE
 )
 }
 \arguments{
-\item{output}{a string. The output format}
+\item{output}{a string. The output format ("pdf", "html" or "word" are
+accepted)}
 
 \item{browser}{a string. The path to the browser which will open the
 generated file format}
@@ -20,9 +22,33 @@ generated file format}
 \item{eval}{a boolean specifying if the code has to be evaluated}
 
 \item{font_size}{a numeric. The font size in pdf format.}
+
+\item{code}{a boolean. Does the copied content is}
+}
+\value{
+This function returns invisibly (with \code{invisible()})
+\code{NULL}.
 }
 \description{
 Format a piece of code to copy it into an email, a pdf, a document, etc.
+}
+\details{
+This function allows the user to generate formatted code (for email,
+document, copy, message, etc.) on the fly.
+
+It accepts mainly word, pdf and html formats, but any format accepted by
+rmarkdown on the computer.
+
+To use this function, simply copy a piece of code and run
+\code{render_code()} with the arguments that interest us.
+If you want content that is not R code, use the \code{code} argument to
+\code{FALSE}.
+If you want the R code to be evaluated (and the result displayed), you can
+use the argument \code{eval} to \code{TRUE}.
+In pdf format, you can change the font size using the \code{font_size}
+argument.
+Finally, you can change the browser that opens the file by default with the
+\code{browser} argument.
 }
 \examples{
 render_code(

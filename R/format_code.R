@@ -1,17 +1,21 @@
 
-#' @title Format code
+#' @title Generate a file with formated code
 #' @description
-#' Formatter un bout de code pour le recopier dans un mail, un pdf, un document...
+#' Format a piece of code to copy it into an email, a pdf, a document, etc.
+#'
+#' @param output a string. The output format
+#' @param browser a string. The path to the browser which will open the
+#' generated file format
+#' @param eval a boolean specifying if the code has to be evaluated
+#' @param font_size a numeric. The font size in pdf format.
 #'
 #' @export
 #' @examples
 #' render_code(
 #'     output = "pdf",
-#'     browser = "C:\\Program Files\\Adobe\\Adobe Illustrator CC 2015\\Support Files\\Contents\\Windows\\Illustrator.exe",
 #'     eval = FALSE,
 #'     font_size = 16
 #' )
-#'
 #'
 render_code <- function(
         output = "word",
@@ -20,31 +24,31 @@ render_code <- function(
         font_size = 12) {
 
     template_first <- paste0(
-        '---
+        "---
 title: \"Format code in mail / word\"
 output:
-  ', output ,
-        '_document:
-    highlight: arrow',
-        if (output == "pdf") '
+  ", output,
+        "_document:
+    highlight: arrow",
+        if (output == "pdf") "
 
     latex_engine: xelatex
     include:
-      in_header: preamble.tex', '
-monofont: "Fira Code"
+      in_header: preamble.tex", "
+monofont: \"Fira Code\"
 code-block-bg: true
 code-block-border-left: \"#31BAE9\"
 ---
 
-\\fontsize{', font_size, '}{', font_size, '}
+\\fontsize{\", font_size, \"}{\", font_size, \"}
 
 ## Running Code
 
-```{r, echo = TRUE, eval = ', eval, '}
-')
-    template_last <- '
+```{r, echo = TRUE, eval = ", eval, "}
+")
+    template_last <- "
 ```
-'
+"
     ext <- switch(
         output,
         word = ".docx",
@@ -63,7 +67,7 @@ code-block-border-left: \"#31BAE9\"
     out_file <- tempfile(pattern = "output", fileext = ext)
 
     write(content, file = rmd_file)
-    b <- rmarkdown::render(input = rmd_file, output_file = out_file)
+    rmarkdown::render(input = rmd_file, output_file = out_file)
     utils::browseURL(
         url = out_file |> normalizePath(mustWork = TRUE),
         browser = browser

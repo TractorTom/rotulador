@@ -17,7 +17,6 @@ Formatter un bout de code pour le recopier dans un mail, un pdf, un document...
 \examples{
 render_code(
     output = "pdf",
-    browser = "C:\\\\Program Files\\\\Adobe\\\\Adobe Illustrator CC 2015\\\\Support Files\\\\Contents\\\\Windows\\\\Illustrator.exe",
     eval = FALSE,
     font_size = 16
 )

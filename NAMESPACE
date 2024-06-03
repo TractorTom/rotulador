@@ -3,3 +3,4 @@
 export(render_code)
 importFrom(rmarkdown,render)
 importFrom(utils,browseURL)
+importFrom(utils,readClipboard)

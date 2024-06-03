@@ -2,7 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom rmarkdown readClipboard
+#' @importFrom utils readClipboard
 #' @importFrom rmarkdown render
 #' @importFrom utils browseURL
 ## usethis namespace: end

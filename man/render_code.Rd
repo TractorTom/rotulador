@@ -2,7 +2,7 @@
 % Please edit documentation in R/format_code.R
 \name{render_code}
 \alias{render_code}
-\title{Format code}
+\title{Generate a file with formated code}
 \usage{
 render_code(
   output = "word",
@@ -11,8 +11,18 @@ render_code(
   font_size = 12
 )
 }
+\arguments{
+\item{output}{a string. The output format}
+
+\item{browser}{a string. The path to the browser which will open the
+generated file format}
+
+\item{eval}{a boolean specifying if the code has to be evaluated}
+
+\item{font_size}{a numeric. The font size in pdf format.}
+}
 \description{
-Formatter un bout de code pour le recopier dans un mail, un pdf, un document...
+Format a piece of code to copy it into an email, a pdf, a document, etc.
 }
 \examples{
 render_code(
@@ -20,6 +30,5 @@ render_code(
     eval = FALSE,
     font_size = 16
 )
-
 
 }

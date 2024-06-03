@@ -25,7 +25,7 @@ render_code <- function(
 
     template_first <- paste0(
         "---
-title: \"Format code in mail / word\"
+title: \"Format code\"
 output:
   ", output,
         "_document:
@@ -40,7 +40,7 @@ code-block-bg: true
 code-block-border-left: \"#31BAE9\"
 ---
 
-\\fontsize{\", font_size, \"}{\", font_size, \"}
+\\fontsize{", font_size, "}{", font_size, "}
 
 ## Running Code
 

@@ -34,9 +34,22 @@
 #'
 #' @export
 #' @examples
+#'
+#' # Copy a snippet of code
+#' utils::writeClipboard("plot(AirPassengers)")
+#'
+#' render_code(
+#'     output = "word"
+#' )
+#'
+#' render_code(
+#'     output = "html",
+#'     eval = FALSE
+#' )
+#'
 #' render_code(
 #'     output = "pdf",
-#'     eval = FALSE,
+#'     eval = TRUE,
 #'     font_size = 16
 #' )
 #'
@@ -53,7 +66,8 @@ render_code <- function(output = "word",
             test = output == "pdf",
             yes = paste0("    latex_engine: xelatex\n",
                          "    includes:\n",
-                         "      in_header: preamble.tex\n"),
+                         "      in_header: preamble.tex\n"
+                         ),
             no = ""
         ),
         "monofont: \"Fira Code\"\n",

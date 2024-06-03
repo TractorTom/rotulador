@@ -4,7 +4,7 @@
 \name{TBox-package}
 \alias{TBox}
 \alias{TBox-package}
-\title{TBox: Useful functions for programming and generating documents}
+\title{TBox: Useful Functions for Programming and Generating Documents}
 \description{
 The package includes a host of tools to help developers and producers manipulate R objects and outputs. It includes tools for displaying results and objects, and for formatting them in the correct format.
 }

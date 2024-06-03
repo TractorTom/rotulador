@@ -51,9 +51,22 @@ Finally, you can change the browser that opens the file by default with the
 \code{browser} argument.
 }
 \examples{
+
+# Copy a snippet of code
+utils::writeClipboard("plot(AirPassengers)")
+
+render_code(
+    output = "word"
+)
+
+render_code(
+    output = "html",
+    eval = FALSE
+)
+
 render_code(
     output = "pdf",
-    eval = FALSE,
+    eval = TRUE,
     font_size = 16
 )
 

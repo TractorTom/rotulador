@@ -1,5 +1,5 @@
 Package: TBox
-Title: Useful functions for programming and generating documents
+Title: Useful Functions for Programming and Generating Documents
 Version: 0.1.0
 Authors@R: 
     person(given = "Tanguy", 

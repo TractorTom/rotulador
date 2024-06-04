@@ -36,7 +36,7 @@
 #' @examples
 #'
 #' # Copy a snippet of code
-#' utils::writeClipboard("plot(AirPassengers)")
+#' clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
 #'
 #' render_code(
 #'     output = "word"
@@ -82,7 +82,7 @@ render_code <- function(output = "word",
         no = ""
     )
 
-    content <- utils::readClipboard(format = 13L) |>
+    content <- clipr::read_clip() |>
         paste(collapse = "\n")
 
     rmd_body <- paste0(

@@ -63,25 +63,26 @@ render_code <- function(output = "word",
         output,
         "_document:\n    highlight: arrow\n",
         ifelse(
-            test = output == "pdf",
-            yes = paste0("    latex_engine: xelatex\n",
-                         "    includes:\n",
-                         "      in_header: preamble.tex\n"
-                         ),
-            no = ""
+            test = (output == "pdf"),
+            yes = "    latex_engine: xelatex\n",
+            no = "monofont: \"Fira Code\"\n"
         ),
-        "monofont: \"Fira Code\"\n",
         "code-block-bg: true\n",
         "code-block-border-left: \"#31BAE9\"\n",
         "---\n"
     )
-    rmd_font <- ifelse(
-        test = output == "pdf",
-        yes = paste0("\n\\fontsize{", font_size, "}{", font_size, "}\n"),
+    rmd_pdf <- ifelse(
+        test = (output == "pdf"),
+        yes = paste0(
+            "\n\\fontsize{", font_size, "}{", font_size, "}\n",
+            "\\setmonofont[ExternalLocation=",
+            system.file("extdata", "FiraCode", package = "TBox"),
+            "/]{FiraCode-Regular.ttf}\n"
+        ),
         no = ""
     )
 
-    content <- utils::readClipboard(format = 1) |>
+    content <- utils::readClipboard(format = 13L) |>
         paste(collapse = "\n")
 
     rmd_body <- paste0(
@@ -95,7 +96,7 @@ render_code <- function(output = "word",
         ifelse(code, "```", ""), "\n"
     )
 
-    rmd_content <- paste0(rmd_header, rmd_font, rmd_body)
+    rmd_content <- paste0(rmd_header, rmd_pdf, rmd_body)
 
     ext <- switch(
         output,

@@ -82,7 +82,7 @@ render_code <- function(output = "word",
         no = ""
     )
 
-    content <- clipr::read_clip() |>
+    content <- clipr::read_clip(allow_non_interactive = TRUE) |>
         paste(collapse = "\n")
 
     rmd_body <- paste0(

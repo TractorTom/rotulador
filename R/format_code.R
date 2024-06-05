@@ -109,10 +109,14 @@ render_code <- function(output = "word",
                                "./preamble.tex")
     file.copy(path_preamble, tempdir())
     rmd_file <- tempfile(pattern = "template", fileext = ".Rmd")
-    out_file <- tempfile(pattern = "output", fileext = ext)
+    out_file <- file.path(tempdir(), paste0("output", ext))
 
     write(rmd_content, file = rmd_file)
-    rmarkdown::render(input = rmd_file, output_file = out_file)
+    rmarkdown::render(
+        input = rmd_file,
+        output_file = "output",
+        output_dir = tempdir()
+    )
     utils::browseURL(
         url = out_file |> normalizePath(mustWork = TRUE),
         browser = browser

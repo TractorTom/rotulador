@@ -49,6 +49,8 @@ jobs:
         config: ${{ fromJson(needs.setup.outputs.containers) }}
     container:
       image: ${{ matrix.config.container }}
+    env:
+      DISPLAY: ':99.0'
 
     steps:
       - uses: r-hub/actions/checkout@v1
@@ -56,6 +58,27 @@ jobs:
         with:
           token: ${{ secrets.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
+
+      - uses: r-lib/actions/setup-pandoc@v2
+      - uses: r-lib/actions/setup-tinytex@v2
+
+      # Some additionnal set up for clipr in ubuntu
+      - name: Install and run XVFB
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          sudo /usr/bin/Xvfb :99.0 -screen 0 1280x1024x24 &
+          sleep 3
+
+      - name: Installation de xclip pour clipr
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install -y xclip
+          # Initialize xclip
+          uptime | xclip -i -sel p -f | xclip -i -sel c
+          xclip -o -sel clipboard
+
       - uses: r-hub/actions/setup-deps@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}

@@ -34,7 +34,7 @@
 #'
 #' @export
 #' @examples
-#'
+#' \donttest{
 #' # Copy a snippet of code
 #' clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
 #'
@@ -52,7 +52,7 @@
 #'     eval = TRUE,
 #'     font_size = 16
 #' )
-#'
+#' }
 render_code <- function(output = "word",
                         browser = getOption("browser"),
                         eval = FALSE,

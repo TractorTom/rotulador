@@ -51,7 +51,7 @@ Finally, you can change the browser that opens the file by default with the
 \code{browser} argument.
 }
 \examples{
-
+\donttest{
 # Copy a snippet of code
 clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
 
@@ -69,5 +69,5 @@ render_code(
     eval = TRUE,
     font_size = 16
 )
-
+}
 }

@@ -58,23 +58,35 @@ render_code <- function(output = "word",
                         eval = FALSE,
                         font_size = 12,
                         code = TRUE) {
+
+    has_xelatex <- nchar(Sys.which("xelatex")) > 0
+
     rmd_header <- paste0(
         "---\ntitle: \"Format code\"\noutput:\n  ",
         output,
         "_document:\n    highlight: arrow\n",
         ifelse(
-            test = (output == "pdf"),
+            test = (output != "pdf"),
+            yes = "monofont: \"Fira Code\"\n",
+            no = ""
+        ),
+        ifelse(
+            test = (output == "pdf" && has_xelatex),
             yes = "    latex_engine: xelatex\n",
-            no = "monofont: \"Fira Code\"\n"
+            no = ""
         ),
         "code-block-bg: true\n",
         "code-block-border-left: \"#31BAE9\"\n",
         "---\n"
     )
-    rmd_pdf <- ifelse(
+    rmd_font_size <- ifelse(
         test = (output == "pdf"),
+        yes = paste0("\n\\fontsize{", font_size, "}{", font_size, "}\n"),
+        no = ""
+    )
+    rmd_monofont <- ifelse(
+        test = (output == "pdf" && has_xelatex),
         yes = paste0(
-            "\n\\fontsize{", font_size, "}{", font_size, "}\n",
             "\\setmonofont[ExternalLocation=",
             system.file("extdata", "FiraCode", package = "TBox"),
             "/]{FiraCode-Regular.ttf}\n"
@@ -96,7 +108,7 @@ render_code <- function(output = "word",
         ifelse(code, "```", ""), "\n"
     )
 
-    rmd_content <- paste0(rmd_header, rmd_pdf, rmd_body)
+    rmd_content <- paste0(rmd_header, rmd_font_size, rmd_monofont, rmd_body)
 
     ext <- switch(
         output,
@@ -105,9 +117,6 @@ render_code <- function(output = "word",
         pdf = ".pdf"
     )
 
-    path_preamble <- file.path(system.file("extdata", package = "TBox"),
-                               "./preamble.tex")
-    file.copy(path_preamble, tempdir())
     rmd_file <- tempfile(pattern = "template", fileext = ".Rmd")
     out_file <- file.path(tempdir(), paste0("output", ext))
 

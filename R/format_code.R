@@ -34,7 +34,6 @@
 #'
 #' @export
 #' @examples
-#' \donttest{
 #' # Copy a snippet of code
 #' clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
 #'
@@ -47,6 +46,7 @@
 #'     eval = FALSE
 #' )
 #'
+#' \donttest{
 #' render_code(
 #'     output = "pdf",
 #'     eval = TRUE,
@@ -58,6 +58,10 @@ render_code <- function(output = "word",
                         eval = FALSE,
                         font_size = 12,
                         code = TRUE) {
+
+    if (Sys.info()["sysname"] == "Linux" && !clipr::clipr_available()) {
+        return(clipr::dr_clipr())
+    }
 
     has_xelatex <- nchar(Sys.which("xelatex")) > 0
 

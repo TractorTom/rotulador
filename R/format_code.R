@@ -118,12 +118,12 @@ render_code <- function(output = "word",
     )
 
     rmd_file <- tempfile(pattern = "template", fileext = ".Rmd")
-    out_file <- file.path(tempdir(), paste0("output", ext))
+    out_file <- tempfile(pattern = "output", fileext = ext)
 
     write(rmd_content, file = rmd_file)
     rmarkdown::render(
         input = rmd_file,
-        output_file = "output",
+        output_file = basename(out_file),
         output_dir = tempdir()
     )
     utils::browseURL(

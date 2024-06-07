@@ -6,7 +6,7 @@
 \alias{TBox-package}
 \title{TBox: Useful Functions for Programming and Generating Documents}
 \description{
-The package includes a host of tools to help developers and producers manipulate R objects and outputs. It includes tools for displaying results and objects, and for formatting them in the correct format.
+Tools to help developers and producers manipulate R objects and outputs. It includes tools for displaying results and objects, and for formatting them in the correct format.
 }
 \author{
 \strong{Maintainer}: Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr}

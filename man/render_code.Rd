@@ -52,7 +52,9 @@ Finally, you can change the browser that opens the file by default with the
 }
 \examples{
 # Copy a snippet of code
-clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
+if (clipr::clipr_available()) {
+    clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
+}
 
 render_code(
     output = "word"

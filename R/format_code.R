@@ -35,7 +35,9 @@
 #' @export
 #' @examples
 #' # Copy a snippet of code
-#' clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
+#' if (clipr::clipr_available()) {
+#'     clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
+#' }
 #'
 #' render_code(
 #'     output = "word"
@@ -59,7 +61,7 @@ render_code <- function(output = "word",
                         font_size = 12,
                         code = TRUE) {
 
-    if (Sys.info()["sysname"] == "Linux" && !clipr::clipr_available()) {
+    if (!clipr::clipr_available()) {
         return(clipr::dr_clipr())
     }
 

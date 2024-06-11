@@ -7,9 +7,10 @@
 #' accepted)
 #' @param browser a string. The path to the browser which will open the
 #' generated file format
-#' @param eval a boolean specifying if the code has to be evaluated
 #' @param font_size a numeric. The font size in pdf format.
 #' @param code a boolean. Does the copied content is
+#' @param ... other arguments passed to R chunk (for example eval = TRUE,
+#' echo = FALSE...)
 #'
 #' @details
 #' This function allows the user to generate formatted code (for email,
@@ -22,12 +23,17 @@
 #' \code{render_code()} with the arguments that interest us.
 #' If you want content that is not R code, use the \code{code} argument to
 #' \code{FALSE}.
-#' If you want the R code to be evaluated (and the result displayed), you can
-#' use the argument \code{eval} to \code{TRUE}.
 #' In pdf format, you can change the font size using the \code{font_size}
 #' argument.
-#' Finally, you can change the browser that opens the file by default with the
+#' Also, you can change the browser that opens the file by default with the
 #' \code{browser} argument.
+#' With the argument \dots, you can specify knitr arguments to be included in
+#' the chunk. For example, you can add \code{eval = TRUE} (if you want the R
+#' code to be evaluated (and the result displayed)), \code{echo = FALSE} (if
+#' you don't want to display the code)... More information in the function
+#' \code{\link[knitr]{opts_chunk}} or directly
+#' \url{https://yihui.org/knitr/options/#chunk-options} to see all available
+#' options and their descriptions.
 #'
 #' @returns This function returns invisibly (with \code{invisible()})
 #' \code{NULL}.
@@ -40,7 +46,8 @@
 #' }
 #'
 #' render_code(
-#'     output = "word"
+#'     output = "word",
+#'     echo = TRUE
 #' )
 #'
 #' render_code(
@@ -57,9 +64,9 @@
 #' }
 render_code <- function(output = "word",
                         browser = getOption("browser"),
-                        eval = FALSE,
                         font_size = 12,
-                        code = TRUE) {
+                        code = TRUE,
+                        ...) {
 
     if (!clipr::clipr_available()) {
         return(clipr::dr_clipr())
@@ -107,7 +114,7 @@ render_code <- function(output = "word",
         "\n## Running Code\n\n",
         ifelse(
             test = code,
-            yes = paste0("```{r, echo = TRUE, eval = ", eval, "}"),
+            yes = chunk_header(...),
             no = ""
         ), "\n",
         content, "\n",
@@ -138,4 +145,40 @@ render_code <- function(output = "word",
     )
 
     return(invisible(NULL))
+}
+
+chunk_header <- function(...) {
+    yaml_begining <- "```{r"
+    yaml_ending <- "}\n"
+
+    additional_args <- vapply(
+        X = list(...),
+        FUN = deparse,
+        FUN.VALUE = character(1L)
+    )
+
+    # Check additionnal argument as knitr options
+    checkmate::assert_character(
+        x = names(additional_args),
+        unique = TRUE, null.ok = TRUE
+    )
+    vapply(
+        X = names(additional_args),
+        FUN =  checkmate::assert_choice,
+        choices = names(knitr::opts_chunk$get()),
+        FUN.VALUE = character(1)
+    )
+
+    yaml_inter <- ifelse(
+        test = length(additional_args) > 0L,
+        yes = paste(",", names(additional_args),
+                    "=", additional_args, collapse = ""),
+        no = ""
+    )
+
+    return(paste0(
+        yaml_begining,
+        yaml_inter,
+        yaml_ending
+    ))
 }

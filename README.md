@@ -6,14 +6,14 @@
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/Tbox)](https://CRAN.R-project.org/package=Tbox)
+status](https://www.r-pkg.org/badges/version/TBox)](https://CRAN.R-project.org/package=TBox)
 
 [![R-CMD-check](https://github.com/TanguyBarthelemy/TBox/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/TBox/actions/workflows/R-CMD-check.yaml)
 [![CodeFactor](https://www.codefactor.io/repository/github/tanguybarthelemy/tbox/badge/main)](https://www.codefactor.io/repository/github/tanguybarthelemy/tbox/overview/main)
-[![lint](https://github.com/TanguyBarthelemy/Tbox/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/Tbox/actions/workflows/lint.yaml)
+[![lint](https://github.com/TanguyBarthelemy/TBox/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/TBox/actions/workflows/lint.yaml)
 
 [![GH Pages
-built](https://github.com/TanguyBarthelemy/Tbox/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/TanguyBarthelemy/Tbox/actions/workflows/pkgdown.yaml)
+built](https://github.com/TanguyBarthelemy/TBox/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/TanguyBarthelemy/TBox/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
 The goal of **TBox** is to provide a tools to help developers and
@@ -28,3 +28,5 @@ You can install the development version of TBox from
 # install.packages("remotes")
 remotes::install_github("TanguyBarthelemy/TBox")
 ```
+
+## Example

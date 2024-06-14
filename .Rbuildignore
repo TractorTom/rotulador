@@ -27,3 +27,4 @@ cran-comments.md
 ^reconf\.sh$
 
 ^LICENSE\.md$
+^codecov\.yml$

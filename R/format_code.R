@@ -1,4 +1,8 @@
 
+get_fira_path <- function() {
+    return(system.file("extdata", "FiraCode", package = "TBox"))
+}
+
 generate_chunk_header <- function(...) {
     yaml_begining <- "```{r"
     yaml_ending <- "}"
@@ -35,9 +39,11 @@ generate_chunk_header <- function(...) {
     ))
 }
 
-generate_rmd_file <- function(output = "word",
+generate_rmd_file <- function(content,
+                              output = "word",
                               font_size = 12,
                               code = TRUE,
+                              fira_path = get_fira_path(),
                               ...) {
 
     has_xelatex <- nchar(Sys.which("xelatex")) > 0
@@ -69,14 +75,11 @@ generate_rmd_file <- function(output = "word",
         test = (output == "pdf" && has_xelatex),
         yes = paste0(
             "\\setmonofont[ExternalLocation=",
-            system.file("extdata", "FiraCode", package = "TBox"),
+            fira_path,
             "/]{FiraCode-Regular.ttf}\n"
         ),
         no = ""
     )
-
-    content <- clipr::read_clip(allow_non_interactive = TRUE) |>
-        paste(collapse = "\n")
 
     rmd_body <- paste0(
         c(
@@ -96,7 +99,7 @@ generate_rmd_file <- function(output = "word",
         collapse = "\n"
     )
 
-    return(paste0(rmd_header, rmd_font_size, rmd_monofont, rmd_body))
+    return(paste0(rmd_header, rmd_font_size, rmd_monofont, rmd_body, "\n"))
 }
 
 #' @title Generate a file with formatted code
@@ -172,7 +175,11 @@ render_code <- function(output = "word",
         return(clipr::dr_clipr())
     }
 
+    content <- clipr::read_clip(allow_non_interactive = TRUE) |>
+        paste(collapse = "\n")
+
     rmd_content <- generate_rmd_file(
+        content = content,
         output = output,
         font_size = font_size,
         code = code,

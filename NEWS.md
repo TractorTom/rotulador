@@ -7,6 +7,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added 
+
+* hidden functions `generate_chunk_header()` and `generate_rmd_file()` to refactor the code and simplify the visibility.
+* hidden functions `get_fira_path()` to get the path to the folder which contains the `.ttf` files
+* new tests
+* test coverage
+
 
 ## [0.1.1]
 
@@ -25,5 +32,5 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
 [Unreleased]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.1...HEAD
-[0.1.1]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.0...0.1.1
+[0.1.1]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/TanguyBarthelemy/TBox/releases/tag/v0.1.0

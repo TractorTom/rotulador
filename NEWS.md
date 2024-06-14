@@ -12,7 +12,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * hidden functions `generate_chunk_header()` and `generate_rmd_file()` to refactor the code and simplify the visibility.
 * hidden functions `get_fira_path()` to get the path to the folder which contains the `.ttf` files
 * new tests
-* test coverage
+* test coverage with pandoc, tinytex and xclip (for ubuntu) installed
 
 
 ## [0.1.1]

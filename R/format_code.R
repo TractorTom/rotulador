@@ -1,4 +1,104 @@
 
+generate_chunk_header <- function(...) {
+    yaml_begining <- "```{r"
+    yaml_ending <- "}\n"
+
+    additional_args <- vapply(
+        X = list(...),
+        FUN = deparse,
+        FUN.VALUE = character(1L)
+    )
+
+    # Check additionnal argument as knitr options
+    checkmate::assert_character(
+        x = names(additional_args),
+        unique = TRUE, null.ok = TRUE
+    )
+    vapply(
+        X = names(additional_args),
+        FUN =  checkmate::assert_choice,
+        choices = names(knitr::opts_chunk$get()),
+        FUN.VALUE = character(1)
+    )
+
+    yaml_inter <- ifelse(
+        test = length(additional_args) > 0L,
+        yes = paste(",", names(additional_args),
+                    "=", additional_args, collapse = ""),
+        no = ""
+    )
+
+    return(paste0(
+        yaml_begining,
+        yaml_inter,
+        yaml_ending
+    ))
+}
+
+generate_rmd_file <- function(output = "word",
+                              font_size = 12,
+                              code = TRUE,
+                              ...) {
+
+    has_xelatex <- nchar(Sys.which("xelatex")) > 0
+
+    rmd_header <- paste0(
+        "---\ntitle: \"Format code\"\noutput:\n  ",
+        output,
+        "_document:\n    highlight: arrow\n",
+        ifelse(
+            test = (output != "pdf"),
+            yes = "monofont: \"Fira Code\"\n",
+            no = ""
+        ),
+        ifelse(
+            test = (output == "pdf" && has_xelatex),
+            yes = "    latex_engine: xelatex\n",
+            no = ""
+        ),
+        "code-block-bg: true\n",
+        "code-block-border-left: \"#31BAE9\"\n",
+        "---\n"
+    )
+    rmd_font_size <- ifelse(
+        test = (output == "pdf"),
+        yes = paste0("\n\\fontsize{", font_size, "}{", font_size, "}\n"),
+        no = ""
+    )
+    rmd_monofont <- ifelse(
+        test = (output == "pdf" && has_xelatex),
+        yes = paste0(
+            "\\setmonofont[ExternalLocation=",
+            system.file("extdata", "FiraCode", package = "TBox"),
+            "/]{FiraCode-Regular.ttf}\n"
+        ),
+        no = ""
+    )
+
+    content <- clipr::read_clip(allow_non_interactive = TRUE) |>
+        paste(collapse = "\n")
+
+    rmd_body <- paste0(
+        c(
+            "\n## Running Code\n",
+            ifelse(
+                test = code,
+                yes = generate_chunk_header(...),
+                no = ""
+            ),
+            content,
+            ifelse(
+                test = code,
+                yes = "```",
+                no = ""
+            )
+        ),
+        collapse = "\n"
+    )
+
+    return(paste0(rmd_header, rmd_font_size, rmd_monofont, rmd_body))
+}
+
 #' @title Generate a file with formatted code
 #' @description
 #' Format a piece of code to copy it into an email, a pdf, a document, etc.
@@ -72,56 +172,12 @@ render_code <- function(output = "word",
         return(clipr::dr_clipr())
     }
 
-    has_xelatex <- nchar(Sys.which("xelatex")) > 0
-
-    rmd_header <- paste0(
-        "---\ntitle: \"Format code\"\noutput:\n  ",
-        output,
-        "_document:\n    highlight: arrow\n",
-        ifelse(
-            test = (output != "pdf"),
-            yes = "monofont: \"Fira Code\"\n",
-            no = ""
-        ),
-        ifelse(
-            test = (output == "pdf" && has_xelatex),
-            yes = "    latex_engine: xelatex\n",
-            no = ""
-        ),
-        "code-block-bg: true\n",
-        "code-block-border-left: \"#31BAE9\"\n",
-        "---\n"
+    rmd_content <- generate_rmd_file(
+        output = output,
+        font_size = font_size,
+        code = code,
+        ...
     )
-    rmd_font_size <- ifelse(
-        test = (output == "pdf"),
-        yes = paste0("\n\\fontsize{", font_size, "}{", font_size, "}\n"),
-        no = ""
-    )
-    rmd_monofont <- ifelse(
-        test = (output == "pdf" && has_xelatex),
-        yes = paste0(
-            "\\setmonofont[ExternalLocation=",
-            system.file("extdata", "FiraCode", package = "TBox"),
-            "/]{FiraCode-Regular.ttf}\n"
-        ),
-        no = ""
-    )
-
-    content <- clipr::read_clip(allow_non_interactive = TRUE) |>
-        paste(collapse = "\n")
-
-    rmd_body <- paste0(
-        "\n## Running Code\n\n",
-        ifelse(
-            test = code,
-            yes = chunk_header(...),
-            no = ""
-        ), "\n",
-        content, "\n",
-        ifelse(code, "```", ""), "\n"
-    )
-
-    rmd_content <- paste0(rmd_header, rmd_font_size, rmd_monofont, rmd_body)
 
     ext <- switch(
         output,
@@ -145,40 +201,4 @@ render_code <- function(output = "word",
     )
 
     return(invisible(NULL))
-}
-
-chunk_header <- function(...) {
-    yaml_begining <- "```{r"
-    yaml_ending <- "}\n"
-
-    additional_args <- vapply(
-        X = list(...),
-        FUN = deparse,
-        FUN.VALUE = character(1L)
-    )
-
-    # Check additionnal argument as knitr options
-    checkmate::assert_character(
-        x = names(additional_args),
-        unique = TRUE, null.ok = TRUE
-    )
-    vapply(
-        X = names(additional_args),
-        FUN =  checkmate::assert_choice,
-        choices = names(knitr::opts_chunk$get()),
-        FUN.VALUE = character(1)
-    )
-
-    yaml_inter <- ifelse(
-        test = length(additional_args) > 0L,
-        yes = paste(",", names(additional_args),
-                    "=", additional_args, collapse = ""),
-        no = ""
-    )
-
-    return(paste0(
-        yaml_begining,
-        yaml_inter,
-        yaml_ending
-    ))
 }

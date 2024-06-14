@@ -1,6 +1,6 @@
 Package: TBox
 Title: Useful Functions for Programming and Generating Documents
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person(given = "Tanguy", 
            family = "Barthelemy", role = c("aut","cre"),

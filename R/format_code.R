@@ -1,7 +1,7 @@
 
 generate_chunk_header <- function(...) {
     yaml_begining <- "```{r"
-    yaml_ending <- "}\n"
+    yaml_ending <- "}"
 
     additional_args <- vapply(
         X = list(...),

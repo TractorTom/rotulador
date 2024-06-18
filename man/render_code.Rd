@@ -5,7 +5,7 @@
 \title{Generate a file with formatted code}
 \usage{
 render_code(
-  output = "word",
+  output = c("word", "pdf", "html"),
   browser = getOption("browser"),
   font_size = 12,
   code = TRUE,
@@ -27,8 +27,13 @@ generated file format}
 echo = FALSE...)}
 }
 \value{
-This function returns invisibly (with \code{invisible()})
-\code{NULL}.
+This function returns invisibly (with \code{invisible()}) a vector
+of length two with two element:
+\itemize{
+\item the path of the created Rmarkdown (template) document (\code{.Rmd})
+\item the path of the created output (in the format \code{.pdf}, \code{.docx} or
+\code{.html}).
+}
 }
 \description{
 Format a piece of code to copy it into an email, a pdf, a document, etc.

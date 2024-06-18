@@ -40,11 +40,20 @@ generate_chunk_header <- function(...) {
 }
 
 generate_rmd_file <- function(content,
-                              output = "word",
+                              output = c("word", "pdf", "html"),
                               font_size = 12,
                               code = TRUE,
                               fira_path = get_fira_path(),
                               ...) {
+
+    output <- match.arg(output)
+
+    # Check content
+    checkmate::assert_character(content)
+    # Check font_size
+    checkmate::assert_count(font_size)
+    # Check code
+    checkmate::assert_logical(code)
 
     has_xelatex <- nchar(Sys.which("xelatex")) > 0
 
@@ -138,8 +147,11 @@ generate_rmd_file <- function(content,
 #' \url{https://yihui.org/knitr/options/#chunk-options} to see all available
 #' options and their descriptions.
 #'
-#' @returns This function returns invisibly (with \code{invisible()})
-#' \code{NULL}.
+#' @returns This function returns invisibly (with \code{invisible()}) a vector
+#' of length two with two element:
+#' - the path of the created Rmarkdown (template) document (\code{.Rmd})
+#' - the path of the created output (in the format \code{.pdf}, \code{.docx} or
+#' \code{.html}).
 #'
 #' @export
 #' @examples
@@ -165,7 +177,7 @@ generate_rmd_file <- function(content,
 #'     font_size = 16
 #' )
 #' }
-render_code <- function(output = "word",
+render_code <- function(output = c("word", "pdf", "html"),
                         browser = getOption("browser"),
                         font_size = 12,
                         code = TRUE,
@@ -177,6 +189,8 @@ render_code <- function(output = "word",
 
     content <- clipr::read_clip(allow_non_interactive = TRUE) |>
         paste(collapse = "\n")
+
+    output <- match.arg(output)
 
     rmd_content <- generate_rmd_file(
         content = content,
@@ -200,12 +214,13 @@ render_code <- function(output = "word",
     rmarkdown::render(
         input = rmd_file,
         output_file = basename(out_file),
-        output_dir = tempdir()
+        output_dir = dirname(out_file)
     )
     utils::browseURL(
         url = out_file |> normalizePath(mustWork = TRUE),
         browser = browser
     )
 
-    return(invisible(NULL))
+    return(invisible(c(rmd_file |> normalizePath(),
+                       out_file |> normalizePath(mustWork = TRUE))))
 }

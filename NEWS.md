@@ -11,15 +11,16 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * hidden functions `generate_chunk_header()` and `generate_rmd_file()` to refactor the code and simplify the visibility.
 * hidden functions `get_fira_path()` to get the path to the folder which contains the `.ttf` files
-* new tests
-* test coverage with pandoc, tinytex and xclip (for ubuntu) installed
+* new tests for all functions
+* new inputs checks for `render_code()`
+* test coverage with pandoc, tinytex and xclip (for Ubuntu) installed
 
 
 ## [0.1.1]
 
 ### Changed
 
-* `render_code` now accept **knitr** chunk option as function arguments
+* `render_code()` now accept **knitr** chunk option as function arguments
 * Add new dependencies: **knitr**` and **checkmate** to get all the different knitr options and to check the inputs of our functions
 
 

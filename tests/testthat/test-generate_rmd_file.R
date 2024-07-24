@@ -5,7 +5,7 @@ testthat::test_that("Everything works with default parameters", {
                    "output:\n",
                    "  word_document:\n",
                    "    highlight: arrow\n",
-                   "    reference_docx: \"User\\template.docx\"\n",
+                   "    reference_docx: \"User/template.docx\"\n",
                    "code-block-bg: true\n",
                    "code-block-border-left: \"#31BAE9\"\n",
                    "---\n\n",
@@ -13,8 +13,8 @@ testthat::test_that("Everything works with default parameters", {
                    "```{r}\n",
                    "plot(AirPassengers)\n",
                    "```\n")
-    obj1_a <- generate_rmd_file(output = "word", content = "plot(AirPassengers)", word_template_path = "User\\template.docx")
-    obj1_b <- generate_rmd_file(output = "word_document", content = "plot(AirPassengers)", word_template_path = "User\\template.docx")
+    obj1_a <- generate_rmd_file(output = "word", content = "plot(AirPassengers)", word_template_path = "User/template.docx")
+    obj1_b <- generate_rmd_file(output = "word_document", content = "plot(AirPassengers)", word_template_path = "User/template.docx")
 
     testthat::expect_identical(object = obj1_a, expected = exp1)
     testthat::expect_identical(object = obj1_b, expected = exp1)
@@ -69,7 +69,7 @@ testthat::test_that("Everything works with custom parameters", {
                    "output:\n",
                    "  word_document:\n",
                    "    highlight: arrow\n",
-                   "    reference_docx: \"User\\template.docx\"\n",
+                   "    reference_docx: \"User/template.docx\"\n",
                    "code-block-bg: true\n",
                    "code-block-border-left: \"#31BAE9\"\n",
                    "---\n\n",
@@ -77,10 +77,10 @@ testthat::test_that("Everything works with custom parameters", {
                    "Bonjour tout le monde\n\n")
     obj1_a <- generate_rmd_file(output = "word",
                                 content = "Bonjour tout le monde",
-                                code = FALSE, word_template_path = "User\\template.docx")
+                                code = FALSE, word_template_path = "User/template.docx")
     obj1_b <- generate_rmd_file(output = "word_document",
                                 content = "Bonjour tout le monde",
-                                code = FALSE, word_template_path = "User\\template.docx")
+                                code = FALSE, word_template_path = "User/template.docx")
 
     testthat::expect_identical(object = obj1_a, expected = exp1)
     testthat::expect_identical(object = obj1_b, expected = exp1)
@@ -137,7 +137,7 @@ testthat::test_that("Everything works with custom parameters", {
                    "output:\n",
                    "  word_document:\n",
                    "    highlight: arrow\n",
-                   "    reference_docx: \"User\\template.docx\"\n",
+                   "    reference_docx: \"User/template.docx\"\n",
                    "code-block-bg: true\n",
                    "code-block-border-left: \"#31BAE9\"\n",
                    "---\n\n",
@@ -147,10 +147,10 @@ testthat::test_that("Everything works with custom parameters", {
                    "```\n")
     obj4_a <- generate_rmd_file(output = "word",
                                 content = "plot(AirPassengers)",
-                                eval = TRUE, word_template_path = "User\\template.docx")
+                                eval = TRUE, word_template_path = "User/template.docx")
     obj4_b <- generate_rmd_file(output = "word_document",
                                 content = "plot(AirPassengers)",
-                                eval = TRUE, word_template_path = "User\\template.docx")
+                                eval = TRUE, word_template_path = "User/template.docx")
 
     testthat::expect_identical(object = obj4_a, expected = exp4)
     testthat::expect_identical(object = obj4_b, expected = exp4)

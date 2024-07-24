@@ -1,10 +1,14 @@
 
 get_fira_path <- function() {
-    return(system.file("extdata", "FiraCode", package = "TBox"))
+    fira_path <- system.file("extdata", "FiraCode", package = "TBox")
+    fira_path <- normalizePath(fira_path, winslash = "/", mustWork = FALSE)
+    return(fira_path)
 }
 
 get_word_template_path <- function() {
-    return(system.file("extdata", "template.docx", package = "TBox"))
+    word_template_path <- system.file("extdata", "template.docx", package = "TBox")
+    word_template_path <- normalizePath(word_template_path, winslash = "/", mustWork = FALSE)
+    return(word_template_path)
 }
 
 generate_chunk_header <- function(...) {
@@ -197,11 +201,16 @@ render_code <- function(
         font_size = 12,
         code = TRUE,
         open = TRUE,
+        fira_path = get_fira_path(),
+        word_template_path = get_word_template_path(),
         ...) {
 
     if (!clipr::clipr_available()) {
         return(clipr::dr_clipr())
     }
+
+    fira_path <- normalizePath(fira_path, winslash = "/", mustWork = TRUE)
+    word_template_path <- normalizePath(word_template_path, winslash = "/", mustWork = TRUE)
 
     content <- paste(clipr::read_clip(allow_non_interactive = TRUE),
                      collapse = "\n")
@@ -217,6 +226,8 @@ render_code <- function(
         output_format = output_format,
         font_size = font_size,
         code = code,
+        fira_path,
+        word_template_path,
         ...
     )
 

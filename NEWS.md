@@ -13,8 +13,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * hidden functions `get_fira_path()` to get the path to the folder which contains the `.ttf` files
 * new tests for all functions
 * new inputs checks for `render_code()`
-* test coverage with pandoc, tinytex and xclip (for Ubuntu) installed
+* test coverage with `pandoc`, **{tinytex}** and `xclip` (for **Ubuntu**) installed
 * test coverage with complete tests
+* new argument `open` to open  (or not) the generated document
 
 ### Removed
 

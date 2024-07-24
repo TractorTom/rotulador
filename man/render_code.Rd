@@ -9,6 +9,7 @@ render_code(
   browser = getOption("browser"),
   font_size = 12,
   code = TRUE,
+  open = TRUE,
   ...
 )
 }
@@ -22,6 +23,9 @@ generated file format}
 \item{font_size}{a numeric. The font size in pdf format.}
 
 \item{code}{a boolean. Does the copied content is}
+
+\item{open}{a boolean. Default is TRUE meaning that the document will open
+automatically after being generated.}
 
 \item{...}{other arguments passed to R chunk (for example eval = TRUE,
 echo = FALSE...)}
@@ -60,6 +64,9 @@ you don't want to display the code)... More information in the function
 \code{\link[knitr]{opts_chunk}} or directly
 \url{https://yihui.org/knitr/options/#chunk-options} to see all available
 options and their descriptions.
+
+If the \code{open} argument is set to \code{FALSE} then the \code{browser}
+argument will be ignored.
 }
 \examples{
 # Copy a snippet of code

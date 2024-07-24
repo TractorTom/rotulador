@@ -121,6 +121,8 @@ generate_rmd_file <- function(content,
 #' generated file format
 #' @param font_size a numeric. The font size in pdf format.
 #' @param code a boolean. Does the copied content is
+#' @param open a boolean. Default is TRUE meaning that the document will open
+#' automatically after being generated.
 #' @param ... other arguments passed to R chunk (for example eval = TRUE,
 #' echo = FALSE...)
 #'
@@ -146,6 +148,9 @@ generate_rmd_file <- function(content,
 #' \code{\link[knitr]{opts_chunk}} or directly
 #' \url{https://yihui.org/knitr/options/#chunk-options} to see all available
 #' options and their descriptions.
+#'
+#' If the \code{open} argument is set to \code{FALSE} then the \code{browser}
+#' argument will be ignored.
 #'
 #' @returns This function returns invisibly (with \code{invisible()}) a vector
 #' of length two with two element:
@@ -181,6 +186,7 @@ render_code <- function(output = c("word", "pdf", "html"),
                         browser = getOption("browser"),
                         font_size = 12,
                         code = TRUE,
+                        open = TRUE,
                         ...) {
 
     if (!clipr::clipr_available()) {
@@ -216,10 +222,13 @@ render_code <- function(output = c("word", "pdf", "html"),
         output_file = basename(out_file),
         output_dir = dirname(out_file)
     )
-    utils::browseURL(
-        url = normalizePath(out_file, mustWork = TRUE),
-        browser = browser
-    )
+
+    if (open) {
+        utils::browseURL(
+            url = normalizePath(out_file, mustWork = TRUE),
+            browser = browser
+        )
+    }
 
     return(invisible(c(normalizePath(rmd_file),
                        normalizePath(out_file, mustWork = TRUE))))

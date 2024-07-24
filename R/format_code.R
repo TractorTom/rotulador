@@ -187,8 +187,8 @@ render_code <- function(output = c("word", "pdf", "html"),
         return(clipr::dr_clipr())
     }
 
-    content <- clipr::read_clip(allow_non_interactive = TRUE) |>
-        paste(collapse = "\n")
+    content <- paste(clipr::read_clip(allow_non_interactive = TRUE),
+                     collapse = "\n")
 
     output <- match.arg(output)
 
@@ -217,10 +217,10 @@ render_code <- function(output = c("word", "pdf", "html"),
         output_dir = dirname(out_file)
     )
     utils::browseURL(
-        url = out_file |> normalizePath(mustWork = TRUE),
+        url = normalizePath(out_file, mustWork = TRUE),
         browser = browser
     )
 
-    return(invisible(c(rmd_file |> normalizePath(),
-                       out_file |> normalizePath(mustWork = TRUE))))
+    return(invisible(c(normalizePath(rmd_file),
+                       normalizePath(out_file, mustWork = TRUE))))
 }

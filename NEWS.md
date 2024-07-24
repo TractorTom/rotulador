@@ -16,6 +16,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * test coverage with pandoc, tinytex and xclip (for Ubuntu) installed
 * test coverage with complete tests
 
+### Removed
+
+* pipe usage for R versions older than 4.1
+
 
 ## [0.1.1]
 

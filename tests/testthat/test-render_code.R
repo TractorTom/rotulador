@@ -9,7 +9,7 @@ testthat::test_that("Everything works with default parameters", {
         paths <- render_code(eval = FALSE)
         rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                          eval = FALSE)
-        written_content <- readLines(paths[1]) |> paste0(collapse = "\n")
+        written_content <- paste0(readLines(paths[1]), collapse = "\n")
 
         testthat::expect_identical(object = rmd_content,
                                    expected = written_content)
@@ -18,7 +18,7 @@ testthat::test_that("Everything works with default parameters", {
         paths <- render_code(eval = TRUE)
         rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                          eval = TRUE)
-        written_content <- readLines(paths[1]) |> paste0(collapse = "\n")
+        written_content <- paste0(readLines(paths[1]), collapse = "\n")
 
         testthat::expect_identical(object = rmd_content,
                                    expected = written_content)
@@ -27,7 +27,7 @@ testthat::test_that("Everything works with default parameters", {
         paths <- render_code(code = FALSE)
         rmd_content <- generate_rmd_file(content = "Bonjour les amis",
                                          code = FALSE)
-        written_content <- readLines(paths[1]) |> paste0(collapse = "\n")
+        written_content <- paste0(readLines(paths[1]), collapse = "\n")
 
         testthat::expect_identical(object = rmd_content,
                                    expected = written_content)

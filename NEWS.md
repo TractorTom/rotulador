@@ -16,6 +16,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * test coverage with `pandoc`, **{tinytex}** and `xclip` (for **Ubuntu**) installed
 * test coverage with complete tests
 * new argument `open` to open  (or not) the generated document
+* template for word generated files
 
 ### Removed
 

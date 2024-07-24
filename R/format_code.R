@@ -3,6 +3,10 @@ get_fira_path <- function() {
     return(system.file("extdata", "FiraCode", package = "TBox"))
 }
 
+get_word_template_path <- function() {
+    return(system.file("extdata", "template.docx", package = "TBox"))
+}
+
 generate_chunk_header <- function(...) {
     yaml_begining <- "```{r"
     yaml_ending <- "}"
@@ -39,14 +43,21 @@ generate_chunk_header <- function(...) {
     ))
 }
 
-generate_rmd_file <- function(content,
-                              output = c("word", "pdf", "html"),
-                              font_size = 12,
-                              code = TRUE,
-                              fira_path = get_fira_path(),
-                              ...) {
+generate_rmd_file <- function(
+        content,
+        output_format = c("word", "pdf", "html",
+                          "word_document", "pdf_document", "html_document"),
+        font_size = 12,
+        code = TRUE,
+        fira_path = get_fira_path(),
+        word_template_path = get_word_template_path(),
+        ...) {
 
-    output <- match.arg(output)
+    output_format <- match.arg(output_format)
+    output_format <- gsub(x = output_format,
+                          pattern = "_document$",
+                          replacement = "",
+                          perl = TRUE, fixed = FALSE)
 
     # Check content
     checkmate::assert_character(content)
@@ -59,29 +70,25 @@ generate_rmd_file <- function(content,
 
     rmd_header <- paste0(
         "---\ntitle: \"Format code\"\noutput:\n  ",
-        output,
+        output_format,
         "_document:\n    highlight: arrow\n",
-        ifelse(
-            test = (output != "pdf"),
-            yes = "monofont: \"Fira Code\"\n",
-            no = ""
-        ),
-        ifelse(
-            test = (output == "pdf" && has_xelatex),
-            yes = "    latex_engine: xelatex\n",
-            no = ""
+        switch(
+            output_format,
+            word = paste0("    reference_docx: \"", word_template_path, "\"\n"),
+            html = "monofont: \"Fira Code\"\n",
+            pdf = if (has_xelatex) "    latex_engine: xelatex\n"
         ),
         "code-block-bg: true\n",
         "code-block-border-left: \"#31BAE9\"\n",
         "---\n"
     )
     rmd_font_size <- ifelse(
-        test = (output == "pdf"),
+        test = (output_format == "pdf"),
         yes = paste0("\n\\fontsize{", font_size, "}{", font_size, "}\n"),
         no = ""
     )
     rmd_monofont <- ifelse(
-        test = (output == "pdf" && has_xelatex),
+        test = (output_format == "pdf" && has_xelatex),
         yes = paste0(
             "\\setmonofont[ExternalLocation=",
             fira_path,
@@ -115,8 +122,9 @@ generate_rmd_file <- function(content,
 #' @description
 #' Format a piece of code to copy it into an email, a pdf, a document, etc.
 #'
-#' @param output a string. The output format ("pdf", "html" or "word" are
-#' accepted)
+#' @param output_format a string representing the output format. The values
+#' "pdf", "html" or "word" and their knitr equivalent "pdf_document",
+#' "html_document" or "word_document" are accepted.
 #' @param browser a string. The path to the browser which will open the
 #' generated file format
 #' @param font_size a numeric. The font size in pdf format.
@@ -154,7 +162,7 @@ generate_rmd_file <- function(content,
 #'
 #' @returns This function returns invisibly (with \code{invisible()}) a vector
 #' of length two with two element:
-#' - the path of the created Rmarkdown (template) document (\code{.Rmd})
+#' - the path of the created rmarkdown (template) document (\code{.Rmd})
 #' - the path of the created output (in the format \code{.pdf}, \code{.docx} or
 #' \code{.html}).
 #'
@@ -166,12 +174,12 @@ generate_rmd_file <- function(content,
 #' }
 #'
 #' render_code(
-#'     output = "word",
+#'     output_format = "word",
 #'     echo = TRUE
 #' )
 #'
 #' render_code(
-#'     output = "html",
+#'     output_format = "html",
 #'     eval = FALSE
 #' )
 #'
@@ -182,12 +190,14 @@ generate_rmd_file <- function(content,
 #'     font_size = 16
 #' )
 #' }
-render_code <- function(output = c("word", "pdf", "html"),
-                        browser = getOption("browser"),
-                        font_size = 12,
-                        code = TRUE,
-                        open = TRUE,
-                        ...) {
+render_code <- function(
+        output_format = c("word", "pdf", "html",
+                          "word_document", "pdf_document", "html_document"),
+        browser = getOption("browser"),
+        font_size = 12,
+        code = TRUE,
+        open = TRUE,
+        ...) {
 
     if (!clipr::clipr_available()) {
         return(clipr::dr_clipr())
@@ -196,18 +206,22 @@ render_code <- function(output = c("word", "pdf", "html"),
     content <- paste(clipr::read_clip(allow_non_interactive = TRUE),
                      collapse = "\n")
 
-    output <- match.arg(output)
+    output_format <- match.arg(output_format)
+    output_format <- gsub(x = output_format,
+                          pattern = "_document$",
+                          replacement = "",
+                          perl = TRUE, fixed = FALSE)
 
     rmd_content <- generate_rmd_file(
         content = content,
-        output = output,
+        output_format = output_format,
         font_size = font_size,
         code = code,
         ...
     )
 
     ext <- switch(
-        output,
+        output_format,
         word = ".docx",
         html = ".html",
         pdf = ".pdf"

@@ -14,6 +14,7 @@ testthat::test_that("Everything works with default parameters", {
         testthat::expect_identical(object = rmd_content,
                                    expected = written_content)
 
+
         clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
         paths <- render_code(eval = TRUE)
         rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
@@ -22,6 +23,7 @@ testthat::test_that("Everything works with default parameters", {
 
         testthat::expect_identical(object = rmd_content,
                                    expected = written_content)
+
 
         clipr::write_clip("Bonjour les amis", allow_non_interactive = TRUE)
         paths <- render_code(code = FALSE)

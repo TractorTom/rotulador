@@ -5,7 +5,8 @@
 \title{Generate a file with formatted code}
 \usage{
 render_code(
-  output = c("word", "pdf", "html"),
+  output_format = c("word", "pdf", "html", "word_document", "pdf_document",
+    "html_document"),
   browser = getOption("browser"),
   font_size = 12,
   code = TRUE,
@@ -14,8 +15,9 @@ render_code(
 )
 }
 \arguments{
-\item{output}{a string. The output format ("pdf", "html" or "word" are
-accepted)}
+\item{output_format}{a string representing the output format. The values
+"pdf", "html" or "word" and their knitr equivalent "pdf_document",
+"html_document" or "word_document" are accepted.}
 
 \item{browser}{a string. The path to the browser which will open the
 generated file format}
@@ -34,7 +36,7 @@ echo = FALSE...)}
 This function returns invisibly (with \code{invisible()}) a vector
 of length two with two element:
 \itemize{
-\item the path of the created Rmarkdown (template) document (\code{.Rmd})
+\item the path of the created rmarkdown (template) document (\code{.Rmd})
 \item the path of the created output (in the format \code{.pdf}, \code{.docx} or
 \code{.html}).
 }
@@ -75,12 +77,12 @@ if (clipr::clipr_available()) {
 }
 
 render_code(
-    output = "word",
+    output_format = "word",
     echo = TRUE
 )
 
 render_code(
-    output = "html",
+    output_format = "html",
     eval = FALSE
 )
 

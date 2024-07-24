@@ -14,6 +14,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * new tests for all functions
 * new inputs checks for `render_code()`
 * test coverage with pandoc, tinytex and xclip (for Ubuntu) installed
+* test coverage with complete tests
 
 
 ## [0.1.1]

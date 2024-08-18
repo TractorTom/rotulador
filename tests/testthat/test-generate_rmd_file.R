@@ -13,8 +13,12 @@ testthat::test_that("Everything works with default parameters", {
                    "```{r}\n",
                    "plot(AirPassengers)\n",
                    "```\n")
-    obj1_a <- generate_rmd_file(output = "word", content = "plot(AirPassengers)", word_template_path = "User/template.docx")
-    obj1_b <- generate_rmd_file(output = "word_document", content = "plot(AirPassengers)", word_template_path = "User/template.docx")
+    obj1_a <- generate_rmd_file(output_format = "word",
+                                content = "plot(AirPassengers)",
+                                word_template_path = "User/template.docx")
+    obj1_b <- generate_rmd_file(output_format = "word_document",
+                                content = "plot(AirPassengers)",
+                                word_template_path = "User/template.docx")
 
     testthat::expect_identical(object = obj1_a, expected = exp1)
     testthat::expect_identical(object = obj1_b, expected = exp1)
@@ -32,8 +36,10 @@ testthat::test_that("Everything works with default parameters", {
                    "```{r}\n",
                    "plot(AirPassengers)\n",
                    "```\n")
-    obj2_a <- generate_rmd_file(output = "html", content = "plot(AirPassengers)")
-    obj2_b <- generate_rmd_file(output = "html_document", content = "plot(AirPassengers)")
+    obj2_a <- generate_rmd_file(output_format = "html",
+                                content = "plot(AirPassengers)")
+    obj2_b <- generate_rmd_file(output_format = "html_document",
+                                content = "plot(AirPassengers)")
 
     testthat::expect_identical(object = obj2_a, expected = exp2)
     testthat::expect_identical(object = obj2_b, expected = exp2)
@@ -55,8 +61,12 @@ testthat::test_that("Everything works with default parameters", {
                    "```{r}\n",
                    "plot(AirPassengers)\n",
                    "```\n")
-    obj3_a <- generate_rmd_file(output = "pdf", content = "plot(AirPassengers)", fira_path = "User")
-    obj3_b <- generate_rmd_file(output = "pdf_document", content = "plot(AirPassengers)", fira_path = "User")
+    obj3_a <- generate_rmd_file(output_format = "pdf",
+                                content = "plot(AirPassengers)",
+                                font_path = "User/FiraCode-Regular.ttf")
+    obj3_b <- generate_rmd_file(output_format = "pdf_document",
+                                content = "plot(AirPassengers)",
+                                font_path = "User/FiraCode-Regular.ttf")
 
     testthat::expect_identical(object = obj3_a, expected = exp3)
     testthat::expect_identical(object = obj3_b, expected = exp3)
@@ -75,12 +85,14 @@ testthat::test_that("Everything works with custom parameters", {
                    "---\n\n",
                    "## Running Code\n\n\n",
                    "Bonjour tout le monde\n\n")
-    obj1_a <- generate_rmd_file(output = "word",
+    obj1_a <- generate_rmd_file(output_format = "word",
                                 content = "Bonjour tout le monde",
-                                code = FALSE, word_template_path = "User/template.docx")
-    obj1_b <- generate_rmd_file(output = "word_document",
+                                code = FALSE,
+                                word_template_path = "User/template.docx")
+    obj1_b <- generate_rmd_file(output_format = "word_document",
                                 content = "Bonjour tout le monde",
-                                code = FALSE, word_template_path = "User/template.docx")
+                                code = FALSE,
+                                word_template_path = "User/template.docx")
 
     testthat::expect_identical(object = obj1_a, expected = exp1)
     testthat::expect_identical(object = obj1_b, expected = exp1)
@@ -97,10 +109,10 @@ testthat::test_that("Everything works with custom parameters", {
                    "---\n\n",
                    "## Running Code\n\n\n",
                    "Bonjour tout le monde\n\n")
-    obj2_a <- generate_rmd_file(output = "html",
+    obj2_a <- generate_rmd_file(output_format = "html",
                                 content = "Bonjour tout le monde",
                                 code = FALSE)
-    obj2_b <- generate_rmd_file(output = "html_document",
+    obj2_b <- generate_rmd_file(output_format = "html_document",
                                 content = "Bonjour tout le monde",
                                 code = FALSE)
 
@@ -121,12 +133,12 @@ testthat::test_that("Everything works with custom parameters", {
                    "ExternalLocation=User/]{FiraCode-Regular.ttf}\n\n",
                    "## Running Code\n\n\n",
                    "Bonjour tout le monde\n\n")
-    obj3_a <- generate_rmd_file(output = "pdf",
+    obj3_a <- generate_rmd_file(output_format = "pdf",
                                 content = "Bonjour tout le monde",
-                                code = FALSE, fira_path = "User")
-    obj3_b <- generate_rmd_file(output = "pdf_document",
+                                code = FALSE, font_path = "User/FiraCode-Regular.ttf")
+    obj3_b <- generate_rmd_file(output_format = "pdf_document",
                                 content = "Bonjour tout le monde",
-                                code = FALSE, fira_path = "User")
+                                code = FALSE, font_path = "User/FiraCode-Regular.ttf")
 
     testthat::expect_identical(object = obj3_a, expected = exp3)
     testthat::expect_identical(object = obj3_b, expected = exp3)
@@ -145,12 +157,14 @@ testthat::test_that("Everything works with custom parameters", {
                    "```{r, eval = TRUE}\n",
                    "plot(AirPassengers)\n",
                    "```\n")
-    obj4_a <- generate_rmd_file(output = "word",
+    obj4_a <- generate_rmd_file(output_format = "word",
                                 content = "plot(AirPassengers)",
-                                eval = TRUE, word_template_path = "User/template.docx")
-    obj4_b <- generate_rmd_file(output = "word_document",
+                                eval = TRUE,
+                                word_template_path = "User/template.docx")
+    obj4_b <- generate_rmd_file(output_format = "word_document",
                                 content = "plot(AirPassengers)",
-                                eval = TRUE, word_template_path = "User/template.docx")
+                                eval = TRUE,
+                                word_template_path = "User/template.docx")
 
     testthat::expect_identical(object = obj4_a, expected = exp4)
     testthat::expect_identical(object = obj4_b, expected = exp4)
@@ -169,10 +183,10 @@ testthat::test_that("Everything works with custom parameters", {
                    "```{r, eval = TRUE}\n",
                    "plot(AirPassengers)\n",
                    "```\n")
-    obj5_a <- generate_rmd_file(output = "html",
+    obj5_a <- generate_rmd_file(output_format = "html",
                                 content = "plot(AirPassengers)",
                                 eval = TRUE)
-    obj5_b <- generate_rmd_file(output = "html_document",
+    obj5_b <- generate_rmd_file(output_format = "html_document",
                                 content = "plot(AirPassengers)",
                                 eval = TRUE)
 
@@ -196,12 +210,12 @@ testthat::test_that("Everything works with custom parameters", {
                    "```{r, eval = TRUE}\n",
                    "plot(AirPassengers)\n",
                    "```\n")
-    obj6_a <- generate_rmd_file(output = "pdf",
+    obj6_a <- generate_rmd_file(output_format = "pdf",
                                 content = "plot(AirPassengers)",
-                                eval = TRUE, fira_path = "User")
-    obj6_b <- generate_rmd_file(output = "pdf_document",
+                                eval = TRUE, font_path = "User/FiraCode-Regular.ttf")
+    obj6_b <- generate_rmd_file(output_format = "pdf_document",
                                 content = "plot(AirPassengers)",
-                                eval = TRUE, fira_path = "User")
+                                eval = TRUE, font_path = "User/FiraCode-Regular.ttf")
 
     testthat::expect_identical(object = obj6_a, expected = exp6)
     testthat::expect_identical(object = obj6_b, expected = exp6)

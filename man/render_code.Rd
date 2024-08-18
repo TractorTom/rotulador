@@ -11,6 +11,8 @@ render_code(
   font_size = 12,
   code = TRUE,
   open = TRUE,
+  font_path = get_fira_path(),
+  word_template_path = get_word_template_path(),
   ...
 )
 }
@@ -24,10 +26,19 @@ generated file format}
 
 \item{font_size}{a numeric. The font size in pdf format.}
 
-\item{code}{a boolean. Does the copied content is}
+\item{code}{a boolean. Should the copied content have to be inserted in R
+chunk or is it just text? Default is TRUE (so the copied content will be
+inserted in R chunk).}
 
 \item{open}{a boolean. Default is TRUE meaning that the document will open
 automatically after being generated.}
+
+\item{font_path}{a string. The path to the font used to render code chunks.
+It should link to a \code{.ttf} file. Only available in pdf format.}
+
+\item{word_template_path}{a string. The path to the word template file used
+when rendering with word. By default, the template used is the one included
+in the package. Only used with word output.}
 
 \item{...}{other arguments passed to R chunk (for example eval = TRUE,
 echo = FALSE...)}
@@ -59,11 +70,13 @@ In pdf format, you can change the font size using the \code{font_size}
 argument.
 Also, you can change the browser that opens the file by default with the
 \code{browser} argument.
+
 With the argument \dots, you can specify knitr arguments to be included in
 the chunk. For example, you can add \code{eval = TRUE} (if you want the R
 code to be evaluated (and the result displayed)), \code{echo = FALSE} (if
-you don't want to display the code)... More information in the function
-\code{\link[knitr]{opts_chunk}} or directly
+you don't want to display the code)...
+
+More information in the function \code{\link[knitr]{opts_chunk}} or directly
 \url{https://yihui.org/knitr/options/#chunk-options} to see all available
 options and their descriptions.
 

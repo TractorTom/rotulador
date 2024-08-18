@@ -1,16 +1,80 @@
 
+#' @title The path to the font Fira Code
+#'
+#' @description
+#' This function returns the path to the font Fira Code installed with
+#' the package TBox.
+#'
+#' @returns a character vector of length 1 representing the path
+#'
+#' @details
+#' This function helps the other functions to find the path to the font Fira
+#' Code to render documents and use this font by default for code chunks.
+#'
+#' @export
+#'
+#' @examples
+#' get_fira_path()
+#'
 get_fira_path <- function() {
-    fira_path <- system.file("extdata", "FiraCode", package = "TBox")
+    fira_path <- system.file("extdata", "FiraCode", "FiraCode-Regular.ttf",
+                             package = "TBox")
     fira_path <- normalizePath(fira_path, winslash = "/", mustWork = FALSE)
     return(fira_path)
 }
 
+#' @title The path to the word template
+#'
+#' @description
+#' This function returns the path to the word template installed with
+#' the package TBox.
+#'
+#' @returns a character vector of length 1 representing the path
+#'
+#' @details
+#' This function helps the other functions to find the template of the word document used to render in \code{.docx} output.
+#'
+#' @export
+#'
+#' @examples
+#' get_word_template_path()
+#'
 get_word_template_path <- function() {
-    word_template_path <- system.file("extdata", "template.docx", package = "TBox")
-    word_template_path <- normalizePath(word_template_path, winslash = "/", mustWork = FALSE)
+    word_template_path <- system.file("extdata", "template.docx",
+                                      package = "TBox")
+    word_template_path <- normalizePath(word_template_path,
+                                        winslash = "/",
+                                        mustWork = FALSE)
     return(word_template_path)
 }
 
+#' @title Generate R chunk header
+#' @description
+#' Function to generate R chunk header for rmarkdown rendering in different
+#' output
+#'
+#' @param ... The different options for R code chunks.
+#'
+#' @returns a string of length 1
+#'
+#' @details
+#' To get the list of all accepted options, you can call
+#' \code{names(knitr::opts_chunk$get())} and to get the default values you can
+#' call \code{knitr::opts_chunk$get()}.
+#'
+#' More information in the function #' \code{\link[knitr]{opts_chunk}} or
+#' directly \url{https://yihui.org/knitr/options/#chunk-options} to see all
+#' available options and their descriptions.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' generate_chunk_header()
+#' generate_chunk_header(eval = TRUE, echo = TRUE)
+#' generate_chunk_header(results = "asis")
+#' generate_chunk_header(fig.width = "4px", fig.height = "3px")
+#'
 generate_chunk_header <- function(...) {
     yaml_begining <- "```{r"
     yaml_ending <- "}"
@@ -47,13 +111,58 @@ generate_chunk_header <- function(...) {
     ))
 }
 
+#' @title Generate Rmd file
+#' @description
+#' This function creates the Rmd file which will be rendered in a specific
+#' format.
+#'
+#' @param content a string. The body of the Rmd file (for example code or text)
+#' @param output_format a string representing the output format. The values
+#' \code{"pdf"}, \code{"html"} or \code{"word"} and their knitr equivalent
+#' \code{"pdf_document"}, \code{"html_document"} or \code{"word_document"} are
+#' accepted.
+#' @param font_size a numeric. The font size, only available in pdf format.
+#' @param code a boolean. Should the \code{content} string have to be inserted
+#' in R chunk or is it just text? Default is TRUE (so the \code{content} will be
+#' inserted in R chunk).
+#' @param font_path a string. The path to the font used to render code chunks.
+#' It should link to a \code{.ttf} file. Only available in pdf format.
+#' @param word_template_path a string. The path to the word template file used
+#' when rendering with word. By default, the template used is the one included
+#' in the package. Only used with word output.
+#' @param \dots other arguments passed to R chunk (for example
+#' \code{eval = TRUE}, \code{echo = FALSE}...)
+#' @returns a string of length 1.
+#'
+#' @details
+#' More information about the argument \dots in the  documentation of the
+#' function \code{\link[TBox]{render_code}}.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' generate_rmd_file(content = "Bonjour tout le monde",
+#'                   code = FALSE,
+#'                   output_format = "word")
+#' generate_rmd_file(content = "print(AirPassengers)",
+#'                   code = TRUE,
+#'                   output_format = "pdf",
+#'                   eval = TRUE,
+#'                   echo = FALSE)
+#' generate_rmd_file(content = "plot(AirPassengers)",
+#'                   code = TRUE,
+#'                   output_format = "html_document",
+#'                   eval = FALSE,
+#'                   echo = TRUE)
+#'
 generate_rmd_file <- function(
         content,
         output_format = c("word", "pdf", "html",
                           "word_document", "pdf_document", "html_document"),
         font_size = 12,
         code = TRUE,
-        fira_path = get_fira_path(),
+        font_path = get_fira_path(),
         word_template_path = get_word_template_path(),
         ...) {
 
@@ -91,12 +200,15 @@ generate_rmd_file <- function(
         yes = paste0("\n\\fontsize{", font_size, "}{", font_size, "}\n"),
         no = ""
     )
+
+    font_dir <- dirname(font_path)
+    font_file <- basename(font_path)
+
     rmd_monofont <- ifelse(
         test = (output_format == "pdf" && has_xelatex),
         yes = paste0(
             "\\setmonofont[ExternalLocation=",
-            fira_path,
-            "/]{FiraCode-Regular.ttf}\n"
+            font_dir, "/]{", font_file, "}\n"
         ),
         no = ""
     )
@@ -132,9 +244,16 @@ generate_rmd_file <- function(
 #' @param browser a string. The path to the browser which will open the
 #' generated file format
 #' @param font_size a numeric. The font size in pdf format.
-#' @param code a boolean. Does the copied content is
+#' @param code a boolean. Should the copied content have to be inserted in R
+#' chunk or is it just text? Default is TRUE (so the copied content will be
+#' inserted in R chunk).
 #' @param open a boolean. Default is TRUE meaning that the document will open
 #' automatically after being generated.
+#' @param font_path a string. The path to the font used to render code chunks.
+#' It should link to a \code{.ttf} file. Only available in pdf format.
+#' @param word_template_path a string. The path to the word template file used
+#' when rendering with word. By default, the template used is the one included
+#' in the package. Only used with word output.
 #' @param ... other arguments passed to R chunk (for example eval = TRUE,
 #' echo = FALSE...)
 #'
@@ -153,11 +272,13 @@ generate_rmd_file <- function(
 #' argument.
 #' Also, you can change the browser that opens the file by default with the
 #' \code{browser} argument.
+#'
 #' With the argument \dots, you can specify knitr arguments to be included in
 #' the chunk. For example, you can add \code{eval = TRUE} (if you want the R
 #' code to be evaluated (and the result displayed)), \code{echo = FALSE} (if
-#' you don't want to display the code)... More information in the function
-#' \code{\link[knitr]{opts_chunk}} or directly
+#' you don't want to display the code)...
+#'
+#' More information in the function \code{\link[knitr]{opts_chunk}} or directly
 #' \url{https://yihui.org/knitr/options/#chunk-options} to see all available
 #' options and their descriptions.
 #'
@@ -201,7 +322,7 @@ render_code <- function(
         font_size = 12,
         code = TRUE,
         open = TRUE,
-        fira_path = get_fira_path(),
+        font_path = get_fira_path(),
         word_template_path = get_word_template_path(),
         ...) {
 
@@ -209,8 +330,9 @@ render_code <- function(
         return(clipr::dr_clipr())
     }
 
-    fira_path <- normalizePath(fira_path, winslash = "/", mustWork = TRUE)
-    word_template_path <- normalizePath(word_template_path, winslash = "/", mustWork = TRUE)
+    font_path <- normalizePath(font_path, winslash = "/", mustWork = TRUE)
+    word_template_path <- normalizePath(word_template_path, winslash = "/",
+                                        mustWork = TRUE)
 
     content <- paste(clipr::read_clip(allow_non_interactive = TRUE),
                      collapse = "\n")
@@ -226,7 +348,7 @@ render_code <- function(
         output_format = output_format,
         font_size = font_size,
         code = code,
-        fira_path,
+        font_path = font_path,
         word_template_path,
         ...
     )
@@ -238,23 +360,25 @@ render_code <- function(
         pdf = ".pdf"
     )
 
-    rmd_file <- tempfile(pattern = "template", fileext = ".Rmd")
-    out_file <- tempfile(pattern = "output", fileext = ext)
+    out_dir <- tempfile(pattern = "render_code", fileext = "")
+    dir.create(out_dir, showWarnings = TRUE, recursive = TRUE)
+
+    rmd_file <- file.path(out_dir, "template.Rmd")
+    out_file <- file.path(out_dir, paste0("output", ext))
 
     write(rmd_content, file = rmd_file)
     rmarkdown::render(
         input = rmd_file,
-        output_file = basename(out_file),
-        output_dir = dirname(out_file)
+        output_file = paste0("output", ext),
+        output_dir = out_dir
     )
 
-    if (open) {
+    if (interactive() && open) {
         utils::browseURL(
             url = normalizePath(out_file, mustWork = TRUE),
             browser = browser
         )
     }
 
-    return(invisible(c(normalizePath(rmd_file),
-                       normalizePath(out_file, mustWork = TRUE))))
+    return(invisible(normalizePath(out_dir, mustWork = TRUE)))
 }

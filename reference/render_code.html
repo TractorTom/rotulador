@@ -46,6 +46,8 @@
 <span>  font_size <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  code <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  font_path <span class="op">=</span> <span class="fu"><a href="get_fira_path.html">get_fira_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  word_template_path <span class="op">=</span> <span class="fu"><a href="get_word_template_path.html">get_word_template_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -70,12 +72,25 @@ generated file format</p></dd>
 
 
 <dt id="arg-code">code<a class="anchor" aria-label="anchor" href="#arg-code"></a></dt>
-<dd><p>a boolean. Does the copied content is</p></dd>
+<dd><p>a boolean. Should the copied content have to be inserted in R
+chunk or is it just text? Default is TRUE (so the copied content will be
+inserted in R chunk).</p></dd>
 
 
 <dt id="arg-open">open<a class="anchor" aria-label="anchor" href="#arg-open"></a></dt>
 <dd><p>a boolean. Default is TRUE meaning that the document will open
 automatically after being generated.</p></dd>
+
+
+<dt id="arg-font-path">font_path<a class="anchor" aria-label="anchor" href="#arg-font-path"></a></dt>
+<dd><p>a string. The path to the font used to render code chunks.
+It should link to a <code>.ttf</code> file. Only available in pdf format.</p></dd>
+
+
+<dt id="arg-word-template-path">word_template_path<a class="anchor" aria-label="anchor" href="#arg-word-template-path"></a></dt>
+<dd><p>a string. The path to the word template file used
+when rendering with word. By default, the template used is the one included
+in the package. Only used with word output.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -103,12 +118,12 @@ If you want content that is not R code, use the <code>code</code> argument to
 In pdf format, you can change the font size using the <code>font_size</code>
 argument.
 Also, you can change the browser that opens the file by default with the
-<code>browser</code> argument.
-With the argument ..., you can specify knitr arguments to be included in
+<code>browser</code> argument.</p>
+<p>With the argument ..., you can specify knitr arguments to be included in
 the chunk. For example, you can add <code>eval = TRUE</code> (if you want the R
 code to be evaluated (and the result displayed)), <code>echo = FALSE</code> (if
-you don't want to display the code)... More information in the function
-<code><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html" class="external-link">opts_chunk</a></code> or directly
+you don't want to display the code)...</p>
+<p>More information in the function <code><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html" class="external-link">opts_chunk</a></code> or directly
 <a href="https://yihui.org/knitr/options/#chunk-options" class="external-link">https://yihui.org/knitr/options/#chunk-options</a> to see all available
 options and their descriptions.</p>
 <p>If the <code>open</code> argument is set to <code>FALSE</code> then the <code>browser</code>

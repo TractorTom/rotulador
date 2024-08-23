@@ -83,7 +83,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
 
         if (clipr::clipr_available()) {
 
-            clipr::write_clip("print(AirPassengers)\nplot(AirPassengers)",
+            clipr::write_clip("print(AirPassengers)\nprint(mtcars)",
                               allow_non_interactive = TRUE)
 
             # Check HTML file
@@ -102,8 +102,8 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
                                   "output.pdf")
             path_template_pdf <- system.file("tests", "output.pdf",
                                              package = "TBox")
-            txt_output_pdf <- pdftools::pdf_text(path_pdf)
-            txt_template_output_pdf <- pdftools::pdf_text(path_template_pdf)
+            txt_output_pdf <- pdftools::pdf_data(path_pdf)
+            txt_template_output_pdf <- pdftools::pdf_data(path_template_pdf)
 
             testthat::expect_identical(object = txt_output_pdf,
                                        expected = txt_template_output_pdf)

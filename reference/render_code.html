@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">TBox</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Generate a file with formatted code</h1>
-      <small class="dont-index">Source: <a href="https://github.com/TanguyBarthelemy/TBox/blob/v0.1.2/R/format_code.R" class="external-link"><code>R/format_code.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/TanguyBarthelemy/TBox/blob/main/R/format_code.R" class="external-link"><code>R/format_code.R</code></a></small>
       <div class="d-none name"><code>render_code.Rd</code></div>
     </div>
 
@@ -40,10 +40,14 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">render_code</span><span class="op">(</span></span>
-<span>  output <span class="op">=</span> <span class="st">"word"</span>,</span>
+<span>  output_format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"word"</span>, <span class="st">"pdf"</span>, <span class="st">"html"</span>, <span class="st">"word_document"</span>, <span class="st">"pdf_document"</span>,</span>
+<span>    <span class="st">"html_document"</span><span class="op">)</span>,</span>
 <span>  browser <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"browser"</span><span class="op">)</span>,</span>
 <span>  font_size <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  code <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  font_path <span class="op">=</span> <span class="fu"><a href="get_fira_path.html">get_fira_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  word_template_path <span class="op">=</span> <span class="fu"><a href="get_word_template_path.html">get_word_template_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -52,9 +56,10 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-output">output<a class="anchor" aria-label="anchor" href="#arg-output"></a></dt>
-<dd><p>a string. The output format ("pdf", "html" or "word" are
-accepted)</p></dd>
+<dl><dt id="arg-output-format">output_format<a class="anchor" aria-label="anchor" href="#arg-output-format"></a></dt>
+<dd><p>a string representing the output format. The values
+"pdf", "html" or "word" and their knitr equivalent "pdf_document",
+"html_document" or "word_document" are accepted.</p></dd>
 
 
 <dt id="arg-browser">browser<a class="anchor" aria-label="anchor" href="#arg-browser"></a></dt>
@@ -67,7 +72,25 @@ generated file format</p></dd>
 
 
 <dt id="arg-code">code<a class="anchor" aria-label="anchor" href="#arg-code"></a></dt>
-<dd><p>a boolean. Does the copied content is</p></dd>
+<dd><p>a boolean. Should the copied content have to be inserted in R
+chunk or is it just text? Default is TRUE (so the copied content will be
+inserted in R chunk).</p></dd>
+
+
+<dt id="arg-open">open<a class="anchor" aria-label="anchor" href="#arg-open"></a></dt>
+<dd><p>a boolean. Default is TRUE meaning that the document will open
+automatically after being generated.</p></dd>
+
+
+<dt id="arg-font-path">font_path<a class="anchor" aria-label="anchor" href="#arg-font-path"></a></dt>
+<dd><p>a string. The path to the font used to render code chunks.
+It should link to a <code>.ttf</code> file. Only available in pdf format.</p></dd>
+
+
+<dt id="arg-word-template-path">word_template_path<a class="anchor" aria-label="anchor" href="#arg-word-template-path"></a></dt>
+<dd><p>a string. The path to the word template file used
+when rendering with word. By default, the template used is the one included
+in the package. Only used with word output.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -77,9 +100,11 @@ echo = FALSE...)</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>This function returns invisibly (with <code><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible()</a></code>)
-<code>NULL</code>.</p>
-    </div>
+    <p>This function returns invisibly (with <code><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible()</a></code>) a vector
+of length two with two element:</p><ul><li><p>the path of the created rmarkdown (template) document (<code>.Rmd</code>)</p></li>
+<li><p>the path of the created output (in the format <code>.pdf</code>, <code>.docx</code> or
+<code>.html</code>).</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function allows the user to generate formatted code (for email,
@@ -93,14 +118,16 @@ If you want content that is not R code, use the <code>code</code> argument to
 In pdf format, you can change the font size using the <code>font_size</code>
 argument.
 Also, you can change the browser that opens the file by default with the
-<code>browser</code> argument.
-With the argument ..., you can specify knitr arguments to be included in
+<code>browser</code> argument.</p>
+<p>With the argument ..., you can specify knitr arguments to be included in
 the chunk. For example, you can add <code>eval = TRUE</code> (if you want the R
 code to be evaluated (and the result displayed)), <code>echo = FALSE</code> (if
-you don't want to display the code)... More information in the function
-<code><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html" class="external-link">opts_chunk</a></code> or directly
+you don't want to display the code)...</p>
+<p>More information in the function <code><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html" class="external-link">opts_chunk</a></code> or directly
 <a href="https://yihui.org/knitr/options/#chunk-options" class="external-link">https://yihui.org/knitr/options/#chunk-options</a> to see all available
 options and their descriptions.</p>
+<p>If the <code>open</code> argument is set to <code>FALSE</code> then the <code>browser</code>
+argument will be ignored.</p>
     </div>
 
     <div class="section level2">
@@ -111,13 +138,13 @@ options and their descriptions.</p>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">render_code</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    output <span class="op">=</span> <span class="st">"word"</span>,</span></span>
+<span class="r-in"><span>    output_format <span class="op">=</span> <span class="st">"word"</span>,</span></span>
 <span class="r-in"><span>    echo <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> CLIPR_ALLOW has not been set, so clipr will not run interactively</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">render_code</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    output <span class="op">=</span> <span class="st">"html"</span>,</span></span>
+<span class="r-in"><span>    output_format <span class="op">=</span> <span class="st">"html"</span>,</span></span>
 <span class="r-in"><span>    eval <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> CLIPR_ALLOW has not been set, so clipr will not run interactively</span>

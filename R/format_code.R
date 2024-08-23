@@ -32,7 +32,8 @@ get_fira_path <- function() {
 #' @returns a character vector of length 1 representing the path
 #'
 #' @details
-#' This function helps the other functions to find the template of the word document used to render in \code{.docx} output.
+#' This function helps the other functions to find the template of the word
+#' document used to render in \code{.docx} output.
 #'
 #' @export
 #'
@@ -93,8 +94,8 @@ generate_chunk_header <- function(...) {
     vapply(
         X = names(additional_args),
         FUN =  checkmate::assert_choice,
-        choices = names(knitr::opts_chunk$get()),
-        FUN.VALUE = character(1)
+        choices = names(knitr::opts_chunk[["get"]]()),
+        FUN.VALUE = character(1L)
     )
 
     yaml_inter <- ifelse(
@@ -160,7 +161,7 @@ generate_rmd_file <- function(
         content,
         output_format = c("word", "pdf", "html",
                           "word_document", "pdf_document", "html_document"),
-        font_size = 12,
+        font_size = 12.,
         code = TRUE,
         font_path = get_fira_path(),
         word_template_path = get_word_template_path(),
@@ -179,7 +180,7 @@ generate_rmd_file <- function(
     # Check code
     checkmate::assert_logical(code)
 
-    has_xelatex <- nchar(Sys.which("xelatex")) > 0
+    has_xelatex <- nchar(Sys.which("xelatex")) > 0L
 
     rmd_header <- paste0(
         "---\ntitle: \"Format code\"\noutput:\n  ",
@@ -319,7 +320,7 @@ render_code <- function(
         output_format = c("word", "pdf", "html",
                           "word_document", "pdf_document", "html_document"),
         browser = getOption("browser"),
-        font_size = 12,
+        font_size = 12.,
         code = TRUE,
         open = TRUE,
         font_path = get_fira_path(),
@@ -376,7 +377,7 @@ render_code <- function(
     if (interactive() && open) {
         utils::browseURL(
             url = normalizePath(out_file, mustWork = TRUE),
-            browser = browser
+            browser = browser # nolint undesirable_function_linter
         )
     }
 

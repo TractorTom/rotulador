@@ -7,6 +7,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## Fixed
+
+* Linting
+
+
+## [0.1.3] - 14/06/2024
+
 ### Removed
 
 * pipe usage for R versions older than 4.1
@@ -46,7 +53,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * new function render_code to render some code on-the-fly to produce PDF, HTML, word and other format quickly by using the clickboard
 
 
-[Unreleased]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/TanguyBarthelemy/TBox/releases/tag/v0.1.0

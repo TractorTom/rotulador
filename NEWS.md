@@ -16,7 +16,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * Minimal R version for tests (devel)
 
 
-## [0.1.3] - 14/06/2024
+## [0.1.3] - 23/08/2024
 
 ### Removed
 

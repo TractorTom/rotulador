@@ -40,7 +40,7 @@ jobs:
           xclip -o -sel clipboard
 
       - name: Installation de libpoppler pour pdftools pour Linux
-        if: runner.os == 'macOS'
+        if: runner.os == 'Linux'
         run: sudo apt-get install libpoppler-cpp-dev
 
       - name: Installation de libpoppler pour pdftools pour MacOS

@@ -11,6 +11,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * Linting
 
+## Changed
+
+* Minimal R version for tests (devel)
+
 
 ## [0.1.3] - 14/06/2024
 

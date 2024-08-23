@@ -14,7 +14,8 @@ This function returns the path to the word template installed with
 the package TBox.
 }
 \details{
-This function helps the other functions to find the template of the word document used to render in \code{.docx} output.
+This function helps the other functions to find the template of the word
+document used to render in \code{.docx} output.
 }
 \examples{
 get_word_template_path()

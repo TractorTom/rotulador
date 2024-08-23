@@ -7,20 +7,27 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Removed
+
+* pipe usage for R versions older than 4.1
+
 ### Added 
 
-* hidden functions `generate_chunk_header()` and `generate_rmd_file()` to refactor the code and simplify the visibility.
-* hidden functions `get_fira_path()` to get the path to the folder which contains the `.ttf` files
 * new tests for all functions
 * new inputs checks for `render_code()`
-* test coverage with `pandoc`, **{tinytex}** and `xclip` (for **Ubuntu**) installed
 * test coverage with complete tests
 * new argument `open` to open  (or not) the generated document
 * template for word generated files
 
-### Removed
 
-* pipe usage for R versions older than 4.1
+## [0.1.2] - 14/06/2024
+
+### Added 
+
+* hidden functions `generate_chunk_header()` and `generate_rmd_file()` to refactor the code and simplify the visibility.
+* hidden functions `get_fira_path()` to get the path to the folder which contains the `.ttf` files
+* new tests
+* test coverage with `pandoc`, **{tinytex}** and `xclip` (for **Ubuntu**) installed
 
 
 ## [0.1.1]
@@ -39,6 +46,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * new function render_code to render some code on-the-fly to produce PDF, HTML, word and other format quickly by using the clickboard
 
 
-[Unreleased]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/TanguyBarthelemy/TBox/releases/tag/v0.1.0

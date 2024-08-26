@@ -53,7 +53,7 @@ testthat::test_that("Everything works with default parameters", {
 
     exp3 <- paste0("---\n",
                    "title: \"Format code\"\n",
-                   "output:\n  ",
+                   "output:\n",
                    "  pdf_document:\n",
                    "    highlight: arrow\n",
                    "    fig_crop: true\n",
@@ -224,7 +224,7 @@ testthat::test_that("Everything works with custom parameters", {
                    "  pdf_document:\n",
                    "    highlight: arrow\n",
                    "    fig_crop: true\n",
-                   if (xelatex)"    latex_engine: xelatex\n",
+                   if (has_xelatex) "    latex_engine: xelatex\n",
                    "code-block-bg: true\n",
                    "code-block-border-left: \"#31BAE9\"\n",
                    "---\n\n",

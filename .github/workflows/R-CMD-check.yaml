@@ -58,14 +58,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ghostscript
-          sudo tlmgr install pdfcrop
           sudo apt install texlive-extra-utils
+          sudo tlmgr install pdfcrop
 
       - name: Installation de pdfcrop pour MacOS
         if: runner.os == 'macOS'
         run: |
-          brew cask install basictex
-          brew cask install tex-live-utility
+          brew install --cask basictex
+          brew install --cask tex-live-utility
 
       - name: Installation de libpoppler pour pdftools pour Linux
         if: runner.os == 'Linux'

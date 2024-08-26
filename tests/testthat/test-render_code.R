@@ -83,7 +83,10 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
 
         if (clipr::clipr_available()) {
 
-            clipr::write_clip("print(AirPassengers)\nprint(mtcars)",
+            clipr::write_clip(content = "
+                                  print(AirPassengers)
+                                  plot(AirPassengers)
+                                  print(mtcars)",
                               allow_non_interactive = TRUE)
 
             # Check HTML file

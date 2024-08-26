@@ -1,4 +1,6 @@
 
+has_xelatex <- nchar(Sys.which("xelatex")) > 0L
+
 testthat::test_that("Everything works with default parameters", {
 
     exp1 <- paste0("---\ntitle: \"Format code\"\n",
@@ -52,9 +54,10 @@ testthat::test_that("Everything works with default parameters", {
     exp3 <- paste0("---\n",
                    "title: \"Format code\"\n",
                    "output:\n  ",
-                   "pdf_document:\n",
+                   "  pdf_document:\n",
                    "    highlight: arrow\n",
-                   "    latex_engine: xelatex\n",
+                   "    fig_crop: true\n",
+                   if (has_xelatex) "    latex_engine: xelatex\n",
                    "code-block-bg: true\n",
                    "code-block-border-left: \"#31BAE9\"\n",
                    "---\n\n",
@@ -137,7 +140,8 @@ testthat::test_that("Everything works with custom parameters", {
                    "output:\n",
                    "  pdf_document:\n",
                    "    highlight: arrow\n",
-                   "    latex_engine: xelatex\n",
+                   "    fig_crop: true\n",
+                   if (has_xelatex) "    latex_engine: xelatex\n",
                    "code-block-bg: true\n",
                    "code-block-border-left: \"#31BAE9\"\n",
                    "---\n\n",
@@ -219,7 +223,8 @@ testthat::test_that("Everything works with custom parameters", {
                    "output:\n",
                    "  pdf_document:\n",
                    "    highlight: arrow\n",
-                   "    latex_engine: xelatex\n",
+                   "    fig_crop: true\n",
+                   if (xelatex)"    latex_engine: xelatex\n",
                    "code-block-bg: true\n",
                    "code-block-border-left: \"#31BAE9\"\n",
                    "---\n\n",

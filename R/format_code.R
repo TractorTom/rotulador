@@ -190,7 +190,8 @@ generate_rmd_file <- function(
             output_format,
             word = paste0("    reference_docx: \"", word_template_path, "\"\n"),
             html = "monofont: \"Fira Code\"\n",
-            pdf = if (has_xelatex) "    latex_engine: xelatex\n"
+            pdf = paste0("    fig_crop: true\n",
+                         if (has_xelatex) "    latex_engine: xelatex\n")
         ),
         "code-block-bg: true\n",
         "code-block-border-left: \"#31BAE9\"\n",

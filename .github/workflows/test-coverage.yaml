@@ -35,7 +35,6 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install -y xclip
-          # Initialize xclip
           uptime | xclip -i -sel p -f | xclip -i -sel c
           xclip -o -sel clipboard
 
@@ -44,14 +43,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ghostscript
-          sudo tlmgr install pdfcrop
           sudo apt install texlive-extra-utils
 
       - name: Installation de pdfcrop pour MacOS
         if: runner.os == 'macOS'
         run: |
-          brew cask install basictex
-          brew cask install tex-live-utility
+          brew install --cask basictex
+          brew install --cask tex-live-utility
 
       - name: Installation de libpoppler pour pdftools pour Linux
         if: runner.os == 'Linux'

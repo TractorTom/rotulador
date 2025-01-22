@@ -15,6 +15,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * Minimal R version for tests (devel)
 
+## Added
+
+* New functions to import and export data in csv format
+
 
 ## [0.1.3] - 23/08/2024
 

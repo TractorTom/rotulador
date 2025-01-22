@@ -9,5 +9,7 @@
 #' @importFrom knitr opts_chunk
 #' @importFrom rmarkdown render
 #' @importFrom utils browseURL
+#' @importFrom utils read.csv
+#' @importFrom utils write.table
 ## usethis namespace: end
 NULL

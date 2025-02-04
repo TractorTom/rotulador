@@ -107,6 +107,8 @@ print(mtcars)",
             txt_output_pdf <- pdftools::pdf_data(path_pdf)
             txt_template_output_pdf <- pdftools::pdf_data(path_template_pdf)
 
+            file.copy(txt_output_pdf, "./output.pdf")
+            
             testthat::expect_identical(object = txt_output_pdf,
                                        expected = txt_template_output_pdf)
         }

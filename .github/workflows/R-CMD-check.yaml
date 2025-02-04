@@ -35,6 +35,12 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-tinytex@v2
+      
+      - name: Install additional LaTeX packages
+        run: |
+          tlmgr update --self
+          tlmgr install pdfcrop
+          tlmgr list --only-installed
 
       # Some additionnal set up for clipr in ubuntu
       - name: Install and run XVFB

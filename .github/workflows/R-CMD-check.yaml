@@ -36,12 +36,6 @@ jobs:
 
       - uses: r-lib/actions/setup-tinytex@v2
       
-      - name: Install additional LaTeX packages
-        run: |
-          tlmgr update --self
-          tlmgr install pdfcrop
-          tlmgr list --only-installed
-
       # Some additionnal set up for clipr in ubuntu
       - name: Install and run XVFB
         if: runner.os == 'Linux'
@@ -70,6 +64,13 @@ jobs:
         run: |
           brew install --cask basictex
           brew install --cask tex-live-utility
+
+      - name: Installation de pdfcrop pour MacOS
+        if: runner.os == 'Windows'
+        run: |
+          tlmgr update --self
+          tlmgr install pdfcrop
+          tlmgr list --only-installed
 
       - name: Installation de libpoppler pour pdftools pour Linux
         if: runner.os == 'Linux'

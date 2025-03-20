@@ -51,6 +51,11 @@ jobs:
 
       - uses: r-lib/actions/setup-tinytex@v2
 
+      - name: Setup makeindex
+        run: |
+            tlmgr update --self
+            tlmgr install makeindex
+
       # Some additionnal set up for clipr in ubuntu
       - name: Install and run XVFB
         if: runner.os == 'Linux'
@@ -67,33 +72,40 @@ jobs:
           uptime | xclip -i -sel p -f | xclip -i -sel c
           xclip -o -sel clipboard
 
-      - name: Installation de pdfcrop pour Linux
+      - name: Installation pour Linux (pdftools and pdfcrop)
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install ghostscript
           sudo apt install texlive-extra-utils
+          sudo apt-get install libpoppler-cpp-dev
 
-      - name: Installation de pdfcrop pour MacOS
+      - name: Installation pour MacOS (pdftools and pdfcrop)
         if: runner.os == 'macOS'
         run: |
           brew update
+          brew install --cask xquartz
           brew install --cask tex-live-utility
+          brew install poppler
 
-      - name: Installation de pdfcrop pour MacOS
+      - name: Installation pour Windows (pdftools and pdfcrop)
         if: runner.os == 'Windows'
         run: |
           tlmgr update --self
           tlmgr install pdfcrop
           tlmgr list --only-installed
 
-      - name: Installation de libpoppler pour pdftools pour Linux
-        if: runner.os == 'Linux'
-        run: sudo apt-get install libpoppler-cpp-dev
-
-      - name: Installation de libpoppler pour pdftools pour MacOS
+      - name: "Update tidy on macos"
         if: runner.os == 'macOS'
-        run: brew install poppler
+        run: |
+          brew update
+          brew install tidy-html5
+
+      - name: "Install tidy on Linux"
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt update
+          sudo apt install -y tidy
 
       - uses: r-lib/actions/setup-r@v2
         with:

@@ -18,14 +18,13 @@ Chaîne de caractère. Chemin du fichier écrit.
 Ecriture des fichiers de donnée
 }
 \details{
-La fonction écrit les données dans un fichier csv avec les paramètres suivants :
-\itemize{
-\item séparateur de colonne : \code{;}
-\item séparateur décimal : \code{.}
-\item pas de guillemets
-\item pas de noms de lignes
-\item les \code{NA} sont remplacés par une chaîne vide.
-}
+La fonction écrit les données dans un fichier csv avec les paramètres
+suivants :
+- séparateur de colonne : \code{;}
+- séparateur décimal : \code{.}
+- pas de guillemets
+- pas de noms de lignes
+- les \code{NA} sont remplacés par une chaîne vide.
 }
 \examples{
 new_path <- tempfile("new_file", fileext = ".csv")

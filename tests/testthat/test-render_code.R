@@ -91,8 +91,8 @@ print(mtcars)",
             # Check HTML file
             path_html <- file.path(render_code(output_format = "html_document"),
                                    "output.html")
-            path_template_html <- system.file("tests", "output.html",
-                                              package = "TBox")
+            path_template_html <- testthat::test_path("output_data",
+                                                      "output.html")
             txt_output_html <- htm2txt::gettxt(path_html)
             txt_template_output_html <- htm2txt::gettxt(path_template_html)
 
@@ -102,10 +102,12 @@ print(mtcars)",
             # Check PDF file
             path_pdf <- file.path(render_code(output_format = "pdf_document"),
                                   "output.pdf")
-            path_template_pdf <- system.file("tests", "output.pdf",
-                                             package = "TBox")
+            path_template_pdf <- testthat::test_path("output_data",
+                                                     "output.pdf")
             txt_output_pdf <- pdftools::pdf_data(path_pdf)
             txt_template_output_pdf <- pdftools::pdf_data(path_template_pdf)
+
+            file.copy(path_pdf, "./output.pdf")
 
             testthat::expect_identical(object = txt_output_pdf,
                                        expected = txt_template_output_pdf)

@@ -9,9 +9,11 @@ get_data(path, erase_zero = TRUE, sep = ";", dec = ".", ...)
 \arguments{
 \item{path}{Chaîne de caractère. Chemin du fichier csv.}
 
-\item{erase_zero}{Booléen. Remplace les valeurs nulle par \code{NA_real_} (par défaut : \code{TRUE}).}
+\item{erase_zero}{Booléen. Remplace les valeurs nulle par \code{NA_real_}
+(par défaut : \code{TRUE}).}
 
-\item{sep}{Chaine de caractère. Séparateur de colonne (par défaut : \code{;}).}
+\item{sep}{Chaine de caractère. Séparateur de colonne (par défaut :
+\code{;}).}
 
 \item{dec}{Chaine de caractère. Séparateur décimal (par défaut : \code{.}).}
 

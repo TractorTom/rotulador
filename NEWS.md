@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+* add `keep-tex` to keep the .tex filegenerated with pdf output
+
 
 ## [0.2.0] - 22/01/2025
 

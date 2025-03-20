@@ -102,7 +102,7 @@ print(mtcars)",
             # Check PDF file
             path_dir <- render_code(output_format = "pdf_document")
             path_pdf <- file.path(path_dir, "output.pdf")
-            # file.copy(path_pdf, "output.pdf")
+            # file.copy(path_pdf, "output.pdf") # nolint
 
             path_template_pdf <- testthat::test_path("output_data",
                                                      "output.pdf")
@@ -115,7 +115,7 @@ print(mtcars)",
 
             # Check .tex file
             path_tex <- file.path(path_dir, "output.tex")
-            # file.copy(path_tex, "output.tex")
+            # file.copy(path_tex, "output.tex") # nolint
 
             path_template_tex <- testthat::test_path("output_data",
                                                      "output.tex")

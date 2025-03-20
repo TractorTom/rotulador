@@ -100,18 +100,30 @@ print(mtcars)",
                                        expected = txt_template_output_html)
 
             # Check PDF file
-            path_pdf <- file.path(render_code(output_format = "pdf_document"),
-                                  "output.pdf")
+            path_dir <- render_code(output_format = "pdf_document")
+            path_pdf <- file.path(path_dir,"output.pdf")
+            file.copy(path_pdf, "./output.pdf")
+
             path_template_pdf <- testthat::test_path("output_data",
                                                      "output.pdf")
             txt_output_pdf <- pdftools::pdf_data(path_pdf)
             txt_template_output_pdf <- pdftools::pdf_data(path_template_pdf)
 
-            file.copy(path_pdf, "./output.pdf")
-            file.copy(gsub(x = path_pdf, pattern = ".pdf", replacement = ".tex"), "./output.tex")
 
-            testthat::expect_identical(object = txt_output_pdf,
-                                       expected = txt_template_output_pdf)
+            # testthat::expect_identical(object = txt_output_pdf,
+            #                            expected = txt_template_output_pdf)
+
+            # Check .tex file
+            path_tex <- file.path(path_dir,"output.tex")
+            file.copy(path_tex, "./output.tex")
+
+            path_template_tex <- testthat::test_path("output_data",
+                                                     "output.tex")
+            txt_output_tex <- readLines(path_tex)
+            txt_template_output_tex <- readLines(path_template_tex)
+
+            testthat::expect_identical(object = txt_output_tex,
+                                       expected = txt_template_output_tex)
         }
 
     })

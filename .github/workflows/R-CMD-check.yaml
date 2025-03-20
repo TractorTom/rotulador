@@ -77,7 +77,7 @@ jobs:
       - name: Installation de pdfcrop pour MacOS
         if: runner.os == 'macOS'
         run: |
-          brew install --cask basictex
+          brew update
           brew install --cask tex-live-utility
 
       - name: Installation de pdfcrop pour MacOS

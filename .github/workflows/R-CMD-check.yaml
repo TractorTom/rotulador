@@ -20,9 +20,24 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: windows-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: macos-latest,   r: 'devel', http-user-agent: 'release'}
+          - {os: macos-latest,   r: 'release'}
+          # - {os: macos-latest,   r: 'oldrel-1'}
+          # - {os: macos-latest,   r: 'oldrel-2'}
+
+          # - {os: windows-latest,  r: 'devel', http-user-agent: 'release'}
+          # - {os: windows-latest,  r: 'next', http-user-agent: 'release'}
+          - {os: windows-latest,  r: 'release'}
+          # - {os: windows-latest,  r: 'oldrel-1'}
+          # - {os: windows-latest,  r: 'oldrel-2'}
+          # - {os: windows-latest,  r: 'oldrel-3'}
+
+          # - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
+          # - {os: ubuntu-latest,  r: 'next', http-user-agent: 'release'}
+          - {os: ubuntu-latest,  r: 'release'}
+          # - {os: ubuntu-latest,  r: 'oldrel-1'}
+          # - {os: ubuntu-latest,  r: 'oldrel-2'}
+          # - {os: ubuntu-latest,  r: 'oldrel-3'}
+
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -95,4 +110,5 @@ jobs:
         with:
           upload-snapshots: true
           upload-results: true
-          build_args: 'c("--as-cran", --no-manual", "--compact-vignettes=gs+qpdf")'
+          args: '"--as-cran"'
+          error-on: '"note"'

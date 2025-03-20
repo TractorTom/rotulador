@@ -9,7 +9,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(eval = FALSE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                              eval = FALSE)
-            written_content <- paste0(readLines(path_rmd), collapse = "\n")
+            written_content <- paste(readLines(path_rmd), collapse = "\n")
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -20,7 +20,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(eval = TRUE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                              eval = TRUE)
-            written_content <- paste0(readLines(path_rmd), collapse = "\n")
+            written_content <- paste(readLines(path_rmd), collapse = "\n")
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -31,7 +31,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(code = FALSE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "Bonjour les amis",
                                              code = FALSE)
-            written_content <- paste0(readLines(path_rmd), collapse = "\n")
+            written_content <- paste(readLines(path_rmd), collapse = "\n")
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -49,7 +49,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(eval = FALSE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                              eval = FALSE)
-            written_content <- paste0(readLines(path_rmd), collapse = "\n")
+            written_content <- paste(readLines(path_rmd), collapse = "\n")
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -60,7 +60,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(eval = TRUE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                              eval = TRUE)
-            written_content <- paste0(readLines(path_rmd), collapse = "\n")
+            written_content <- paste(readLines(path_rmd), collapse = "\n")
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -70,7 +70,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(code = FALSE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "Bonjour les amis",
                                              code = FALSE)
-            written_content <- paste0(readLines(path_rmd), collapse = "\n")
+            written_content <- paste(readLines(path_rmd), collapse = "\n")
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -101,8 +101,8 @@ print(mtcars)",
 
             # Check PDF file
             path_dir <- render_code(output_format = "pdf_document")
-            path_pdf <- file.path(path_dir,"output.pdf")
-            file.copy(path_pdf, "./output.pdf")
+            path_pdf <- file.path(path_dir, "output.pdf")
+            file.copy(path_pdf, "output.pdf")
 
             path_template_pdf <- testthat::test_path("output_data",
                                                      "output.pdf")
@@ -114,8 +114,8 @@ print(mtcars)",
             #                            expected = txt_template_output_pdf)
 
             # Check .tex file
-            path_tex <- file.path(path_dir,"output.tex")
-            file.copy(path_tex, "./output.tex")
+            path_tex <- file.path(path_dir, "output.tex")
+            file.copy(path_tex, "output.tex")
 
             path_template_tex <- testthat::test_path("output_data",
                                                      "output.tex")

@@ -27,7 +27,7 @@
 #'
 get_data <- function(path, erase_zero = TRUE, sep = ";", dec = ".", ...) {
     path <- normalizePath(path, mustWork = TRUE)
-    data <- read.csv(
+    data_read <- read.csv(
         file = path,
         sep = sep,
         dec = dec,
@@ -36,9 +36,9 @@ get_data <- function(path, erase_zero = TRUE, sep = ";", dec = ".", ...) {
         ...
     )
     if (erase_zero) {
-        data[data == 0L] <- NA_real_
+        data_read[data_read == 0L] <- NA_real_
     }
-    return(data)
+    return(data_read)
 }
 
 

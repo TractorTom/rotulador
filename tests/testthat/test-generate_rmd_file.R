@@ -1,5 +1,5 @@
 
-has_xelatex <- nchar(Sys.which("xelatex")) > 0L
+has_xelatex <- nzchar(Sys.which("xelatex"))
 
 testthat::test_that("Everything works with default parameters", {
 

@@ -9,7 +9,7 @@ format."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">TBox</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@ format."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Generate Rmd file</h1>
-      <small class="dont-index">Source: <a href="https://github.com/TanguyBarthelemy/TBox/blob/v0.2.0/R/format_code.R" class="external-link"><code>R/format_code.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/TanguyBarthelemy/TBox/blob/v0.2.1/R/format_code.R" class="external-link"><code>R/format_code.R</code></a></small>
       <div class="d-none name"><code>generate_rmd_file.Rd</code></div>
     </div>
 
@@ -117,7 +117,7 @@ function <code><a href="render_code.html">render_code</a></code>.</p>
 <span class="r-in"><span>                  output_format <span class="op">=</span> <span class="st">"pdf"</span>,</span></span>
 <span class="r-in"><span>                  eval <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                  echo <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "---\ntitle: \"Format code\"\noutput:\n  pdf_document:\n    highlight: arrow\n    fig_crop: true\n    latex_engine: xelatex\ncode-block-bg: true\ncode-block-border-left: \"#31BAE9\"\n---\n\n\\fontsize{12}{12}\n\\setmonofont[ExternalLocation=/home/runner/work/_temp/Library/TBox/extdata/FiraCode/]{FiraCode-Regular.ttf}\n\n## Running Code\n\n```{r, eval = TRUE, echo = FALSE}\nprint(AirPassengers)\n```\n"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "---\ntitle: \"Format code\"\noutput:\n  pdf_document:\n    highlight: arrow\n    fig_crop: true\n    latex_engine: xelatex\n    keep_tex: true\ncode-block-bg: true\ncode-block-border-left: \"#31BAE9\"\n---\n\n\\fontsize{12}{12}\n\\setmonofont[ExternalLocation=/home/runner/work/_temp/Library/TBox/extdata/FiraCode/]{FiraCode-Regular.ttf}\n\n## Running Code\n\n```{r, eval = TRUE, echo = FALSE}\nprint(AirPassengers)\n```\n"</span>
 <span class="r-in"><span><span class="fu">generate_rmd_file</span><span class="op">(</span>content <span class="op">=</span> <span class="st">"plot(AirPassengers)"</span>,</span></span>
 <span class="r-in"><span>                  code <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                  output_format <span class="op">=</span> <span class="st">"html_document"</span>,</span></span>

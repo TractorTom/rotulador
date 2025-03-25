@@ -411,7 +411,13 @@ render_code <- function(
     rmarkdown::render(
         input = rmd_file,
         output_file = paste0("output", ext),
-        output_dir = out_dir
+        output_dir = out_dir,
+        output_format = switch(
+            output_format,
+            pdf = rmarkdown::pdf_document(pandoc_args = "markdown-auto_identifiers"),
+            word = rmarkdown::word_document(),
+            html = rmarkdown::html_document()
+        )
     )
 
     if (interactive() && open) {

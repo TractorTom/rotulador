@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+* The rendering calls new Pandoc args for PDF.
+
 ### Added
 
 * New function to detect latex-engine

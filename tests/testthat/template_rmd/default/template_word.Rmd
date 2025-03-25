@@ -1,0 +1,18 @@
+---
+title: "Format code"
+output:
+  word_document:
+    highlight: arrow
+    reference_docx: "User/template.docx"
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+---
+
+
+
+
+## Running Code
+
+```{r}
+plot(AirPassengers)
+```

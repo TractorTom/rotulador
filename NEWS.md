@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+* New function to detect latex-engine
 
 ## [0.2.1] - 25/03/2025
 

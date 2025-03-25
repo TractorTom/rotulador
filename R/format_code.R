@@ -1,4 +1,39 @@
 
+#' @title The latex
+#'
+#' @description
+#' This function returns the latex engine available to render .tex file into
+#' pdf.
+#'
+#' @returns a character vector of length 1 representing the latex engine.
+#'
+#' @details
+#' If several latex engine are available, the choice will be done in this order:
+#'
+#' - xelatex
+#' - lualatex
+#' - pdflatex
+#' - tectonic
+#'
+#' @export
+#'
+#' @examples
+#' get_latex_engine()
+#'
+get_latex_engine <- function() {
+    if (nzchar(Sys.which("xelatex"))) {
+        return("xelatex")
+    } else if (nzchar(Sys.which("lualatex"))) {
+        return("lualatex")
+    } else if (nzchar(Sys.which("pdflatex"))) {
+        return("pdflatex")
+    } else if (nzchar(Sys.which("tectonic"))) {
+        return("tectonic")
+    } else {
+        return("")
+    }
+}
+
 #' @title The path to the font Fira Code
 #'
 #' @description
@@ -180,27 +215,31 @@ generate_rmd_file <- function(
     # Check code
     checkmate::assert_logical(code)
 
-    has_xelatex <- nzchar(Sys.which("xelatex"))
-
-    rmd_header <- paste0(
-        "---\ntitle: \"Format code\"\noutput:\n  ",
-        output_format,
-        "_document:\n    highlight: arrow\n",
+    latex_engine <- get_latex_engine()
+    rmd_header <- c(
+        "---",
+        "title: \"Format code\"",
+        "output:",
+        paste0("  ", output_format, "_document:"),
+        "    highlight: arrow",
         switch(
             output_format,
-            word = paste0("    reference_docx: \"", word_template_path, "\"\n"),
-            html = "monofont: \"Fira Code\"\n",
-            pdf = paste0("    fig_crop: true\n",
-                         if (has_xelatex) "    latex_engine: xelatex\n",
-                         "    keep_tex: true\n")
+            word = paste0("    reference_docx: \"", word_template_path, "\""),
+            html = "monofont: \"Fira Code\"",
+            pdf = c(
+                "    fig_crop: true",
+                if (nzchar(latex_engine)) paste0("    latex_engine: ", latex_engine),
+                "    keep_tex: true"
+            )
         ),
-        "code-block-bg: true\n",
-        "code-block-border-left: \"#31BAE9\"\n",
-        "---\n"
+        "code-block-bg: true",
+        "code-block-border-left: \"#31BAE9\"",
+        "---",
+        ""
     )
     rmd_font_size <- ifelse(
         test = (output_format == "pdf"),
-        yes = paste0("\n\\fontsize{", font_size, "}{", font_size, "}\n"),
+        yes = paste0("\\fontsize{", font_size, "}{", font_size, "}"),
         no = ""
     )
 
@@ -208,33 +247,33 @@ generate_rmd_file <- function(
     font_file <- basename(font_path)
 
     rmd_monofont <- ifelse(
-        test = (output_format == "pdf" && has_xelatex),
+        test = (output_format == "pdf"
+                && latex_engine %in% c("xelatex", "lualatex")),
         yes = paste0(
             "\\setmonofont[ExternalLocation=",
-            font_dir, "/]{", font_file, "}\n"
+            font_dir, "/]{", font_file, "}"
         ),
         no = ""
     )
 
-    rmd_body <- paste(
-        c(
-            "\n## Running Code\n",
-            ifelse(
-                test = code,
-                yes = generate_chunk_header(...),
-                no = ""
-            ),
-            content,
-            ifelse(
-                test = code,
-                yes = "```",
-                no = ""
-            )
+    rmd_body <- c(
+        "",
+        "## Running Code",
+        "",
+        ifelse(
+            test = code,
+            yes = generate_chunk_header(...),
+            no = ""
         ),
-        collapse = "\n"
+        content,
+        ifelse(
+            test = code,
+            yes = "```",
+            no = ""
+        )
     )
 
-    return(paste0(rmd_header, rmd_font_size, rmd_monofont, rmd_body, "\n"))
+    return(c(rmd_header, rmd_font_size, rmd_monofont, rmd_body))
 }
 
 #' @title Generate a file with formatted code
@@ -337,8 +376,7 @@ render_code <- function(
     word_template_path <- normalizePath(word_template_path, winslash = "/",
                                         mustWork = TRUE)
 
-    content <- paste(clipr::read_clip(allow_non_interactive = TRUE),
-                     collapse = "\n")
+    content <- clipr::read_clip(allow_non_interactive = TRUE)
 
     output_format <- match.arg(output_format)
     output_format <- gsub(x = output_format,

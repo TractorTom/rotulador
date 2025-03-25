@@ -1,0 +1,18 @@
+---
+title: "Format code"
+output:
+  html_document:
+    highlight: arrow
+monofont: "Fira Code"
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+---
+
+
+
+
+## Running Code
+
+```{r, eval = TRUE}
+plot(AirPassengers)
+```

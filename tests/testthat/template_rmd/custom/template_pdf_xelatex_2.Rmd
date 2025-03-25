@@ -1,0 +1,20 @@
+---
+title: "Format code"
+output:
+  pdf_document:
+    highlight: arrow
+    fig_crop: true
+    latex_engine: xelatex
+    keep_tex: true
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+---
+
+\fontsize{12}{12}
+\setmonofont[ExternalLocation=User/]{FiraCode-Regular.ttf}
+
+## Running Code
+
+```{r, eval = TRUE}
+plot(AirPassengers)
+```

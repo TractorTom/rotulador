@@ -9,7 +9,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(eval = FALSE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                              eval = FALSE)
-            written_content <- paste(readLines(path_rmd), collapse = "\n")
+            written_content <- readLines(path_rmd)
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -20,7 +20,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(eval = TRUE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                              eval = TRUE)
-            written_content <- paste(readLines(path_rmd), collapse = "\n")
+            written_content <- readLines(path_rmd)
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -31,7 +31,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(code = FALSE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "Bonjour les amis",
                                              code = FALSE)
-            written_content <- paste(readLines(path_rmd), collapse = "\n")
+            written_content <- readLines(path_rmd)
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -49,7 +49,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(eval = FALSE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                              eval = FALSE)
-            written_content <- paste(readLines(path_rmd), collapse = "\n")
+            written_content <- readLines(path_rmd)
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -60,7 +60,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(eval = TRUE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "plot(AirPassengers)",
                                              eval = TRUE)
-            written_content <- paste(readLines(path_rmd), collapse = "\n")
+            written_content <- readLines(path_rmd)
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)
@@ -70,7 +70,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             path_rmd <- file.path(render_code(code = FALSE), "template.Rmd")
             rmd_content <- generate_rmd_file(content = "Bonjour les amis",
                                              code = FALSE)
-            written_content <- paste(readLines(path_rmd), collapse = "\n")
+            written_content <- readLines(path_rmd)
 
             testthat::expect_identical(object = rmd_content,
                                        expected = written_content)

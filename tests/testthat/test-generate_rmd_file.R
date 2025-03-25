@@ -1,20 +1,9 @@
-
-has_xelatex <- nzchar(Sys.which("xelatex"))
+devtools::load_all()
+latex_engine <- get_latex_engine()
 
 testthat::test_that("Everything works with default parameters", {
 
-    exp1 <- paste0("---\ntitle: \"Format code\"\n",
-                   "output:\n",
-                   "  word_document:\n",
-                   "    highlight: arrow\n",
-                   "    reference_docx: \"User/template.docx\"\n",
-                   "code-block-bg: true\n",
-                   "code-block-border-left: \"#31BAE9\"\n",
-                   "---\n\n",
-                   "## Running Code\n\n",
-                   "```{r}\n",
-                   "plot(AirPassengers)\n",
-                   "```\n")
+    exp1 <- readLines(testthat::test_path("template_rmd", "default", "template_word.Rmd"))
     obj1_a <- generate_rmd_file(
         output_format = "word",
         content = "plot(AirPassengers)",
@@ -30,18 +19,7 @@ testthat::test_that("Everything works with default parameters", {
     testthat::expect_identical(object = obj1_b, expected = exp1)
 
 
-    exp2 <- paste0("---\ntitle: \"Format code\"\n",
-                   "output:\n",
-                   "  html_document:\n",
-                   "    highlight: arrow\n",
-                   "monofont: \"Fira Code\"\n",
-                   "code-block-bg: true\n",
-                   "code-block-border-left: \"#31BAE9\"\n",
-                   "---\n\n",
-                   "## Running Code\n\n",
-                   "```{r}\n",
-                   "plot(AirPassengers)\n",
-                   "```\n")
+    exp2 <- readLines(testthat::test_path("template_rmd", "default", "template_html.Rmd"))
     obj2_a <- generate_rmd_file(output_format = "html",
                                 content = "plot(AirPassengers)")
     obj2_b <- generate_rmd_file(output_format = "html_document",
@@ -51,24 +29,7 @@ testthat::test_that("Everything works with default parameters", {
     testthat::expect_identical(object = obj2_b, expected = exp2)
 
 
-    exp3 <- paste0("---\n",
-                   "title: \"Format code\"\n",
-                   "output:\n",
-                   "  pdf_document:\n",
-                   "    highlight: arrow\n",
-                   "    fig_crop: true\n",
-                   if (has_xelatex) "    latex_engine: xelatex\n",
-                   "    keep_tex: true\n",
-                   "code-block-bg: true\n",
-                   "code-block-border-left: \"#31BAE9\"\n",
-                   "---\n\n",
-                   "\\fontsize{12}{12}\n\\setmonofont[",
-                   "ExternalLocation=User/]{FiraCode-Regular.ttf}", # nolint unportable_path_linter
-                   "\n\n",
-                   "## Running Code\n\n",
-                   "```{r}\n",
-                   "plot(AirPassengers)\n",
-                   "```\n")
+    exp3 <- readLines(testthat::test_path("template_rmd", "default", paste0("template_pdf_", latex_engine, ".Rmd")))
     obj3_a <- generate_rmd_file(
         output_format = "pdf",
         content = "plot(AirPassengers)",
@@ -86,17 +47,7 @@ testthat::test_that("Everything works with default parameters", {
 
 testthat::test_that("Everything works with custom parameters", {
 
-    exp1 <- paste0("---\n",
-                   "title: \"Format code\"\n",
-                   "output:\n",
-                   "  word_document:\n",
-                   "    highlight: arrow\n",
-                   "    reference_docx: \"User/template.docx\"\n",
-                   "code-block-bg: true\n",
-                   "code-block-border-left: \"#31BAE9\"\n",
-                   "---\n\n",
-                   "## Running Code\n\n\n",
-                   "Bonjour tout le monde\n\n")
+    exp1 <- readLines(testthat::test_path("template_rmd", "custom", "template_word_1.Rmd"))
     obj1_a <- generate_rmd_file(
         output_format = "word",
         content = "Bonjour tout le monde",
@@ -114,17 +65,7 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj1_b, expected = exp1)
 
 
-    exp2 <- paste0("---\n",
-                   "title: \"Format code\"\n",
-                   "output:\n",
-                   "  html_document:\n",
-                   "    highlight: arrow\n",
-                   "monofont: \"Fira Code\"\n",
-                   "code-block-bg: true\n",
-                   "code-block-border-left: \"#31BAE9\"\n",
-                   "---\n\n",
-                   "## Running Code\n\n\n",
-                   "Bonjour tout le monde\n\n")
+    exp2 <- readLines(testthat::test_path("template_rmd", "custom", "template_html_1.Rmd"))
     obj2_a <- generate_rmd_file(output_format = "html",
                                 content = "Bonjour tout le monde",
                                 code = FALSE)
@@ -136,21 +77,7 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj2_b, expected = exp2)
 
 
-    exp3 <- paste0("---\n",
-                   "title: \"Format code\"\n",
-                   "output:\n",
-                   "  pdf_document:\n",
-                   "    highlight: arrow\n",
-                   "    fig_crop: true\n",
-                   if (has_xelatex) "    latex_engine: xelatex\n",
-                   "    keep_tex: true\n",
-                   "code-block-bg: true\n",
-                   "code-block-border-left: \"#31BAE9\"\n",
-                   "---\n\n",
-                   "\\fontsize{12}{12}\n\\setmonofont[",
-                   "ExternalLocation=User/]{FiraCode-Regular.ttf}\n\n",
-                   "## Running Code\n\n\n",
-                   "Bonjour tout le monde\n\n")
+    exp3 <- readLines(testthat::test_path("template_rmd", "custom", paste0("template_pdf_", latex_engine, "_1.Rmd")))
     obj3_a <- generate_rmd_file(
         output_format = "pdf",
         content = "Bonjour tout le monde",
@@ -166,19 +93,7 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj3_b, expected = exp3)
 
 
-    exp4 <- paste0("---\n",
-                   "title: \"Format code\"\n",
-                   "output:\n",
-                   "  word_document:\n",
-                   "    highlight: arrow\n",
-                   "    reference_docx: \"User/template.docx\"\n",
-                   "code-block-bg: true\n",
-                   "code-block-border-left: \"#31BAE9\"\n",
-                   "---\n\n",
-                   "## Running Code\n\n",
-                   "```{r, eval = TRUE}\n",
-                   "plot(AirPassengers)\n",
-                   "```\n")
+    exp4 <- readLines(testthat::test_path("template_rmd", "custom", "template_word_2.Rmd"))
     obj4_a <- generate_rmd_file(
         output_format = "word",
         content = "plot(AirPassengers)",
@@ -196,19 +111,7 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj4_b, expected = exp4)
 
 
-    exp5 <- paste0("---\n",
-                   "title: \"Format code\"\n",
-                   "output:\n",
-                   "  html_document:\n",
-                   "    highlight: arrow\n",
-                   "monofont: \"Fira Code\"\n",
-                   "code-block-bg: true\n",
-                   "code-block-border-left: \"#31BAE9\"\n",
-                   "---\n\n",
-                   "## Running Code\n\n",
-                   "```{r, eval = TRUE}\n",
-                   "plot(AirPassengers)\n",
-                   "```\n")
+    exp5 <- readLines(testthat::test_path("template_rmd", "custom", "template_html_2.Rmd"))
     obj5_a <- generate_rmd_file(output_format = "html",
                                 content = "plot(AirPassengers)",
                                 eval = TRUE)
@@ -220,24 +123,7 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj5_b, expected = exp5)
 
 
-    exp6 <- paste0("---\n",
-                   "title: \"Format code\"\n",
-                   "output:\n",
-                   "  pdf_document:\n",
-                   "    highlight: arrow\n",
-                   "    fig_crop: true\n",
-                   if (has_xelatex) "    latex_engine: xelatex\n",
-                   "    keep_tex: true\n",
-                   "code-block-bg: true\n",
-                   "code-block-border-left: \"#31BAE9\"\n",
-                   "---\n\n",
-                   "\\fontsize{12}{12}\n",
-                   "\\setmonofont[",
-                   "ExternalLocation=User/]{FiraCode-Regular.ttf}\n\n", # nolint unportable_path_linter
-                   "## Running Code\n\n",
-                   "```{r, eval = TRUE}\n",
-                   "plot(AirPassengers)\n",
-                   "```\n")
+    exp6 <- readLines(testthat::test_path("template_rmd", "custom", paste0("template_pdf_", latex_engine, "_2.Rmd")))
     obj6_a <- generate_rmd_file(
         output_format = "pdf",
         content = "plot(AirPassengers)",

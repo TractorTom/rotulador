@@ -9,11 +9,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-* The rendering calls new Pandoc args for PDF.
+* The rendering calls new Pandoc args for PDF and use the word template for word
 
 ### Added
 
 * New function to detect latex-engine
+* tests for render_code
+
 
 ## [0.2.1] - 25/03/2025
 

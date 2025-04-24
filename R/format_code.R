@@ -10,10 +10,12 @@
 #' @details
 #' If several latex engine are available, the choice will be done in this order:
 #'
-#' - xelatex
-#' - lualatex
-#' - pdflatex
-#' - tectonic
+#' \itemize{
+#' \item xelatex;
+#' \item lualatex;
+#' \item pdflatex;
+#' \item tectonic.
+#' }
 #'
 #' @export
 #'
@@ -163,9 +165,6 @@ generate_chunk_header <- function(...) {
 #' inserted in R chunk).
 #' @param font_path a string. The path to the font used to render code chunks.
 #' It should link to a \code{.ttf} file. Only available in pdf format.
-#' @param word_template_path a string. The path to the word template file used
-#' when rendering with word. By default, the template used is the one included
-#' in the package. Only used with word output.
 #' @param \dots other arguments passed to R chunk (for example
 #' \code{eval = TRUE}, \code{echo = FALSE}...)
 #' @returns a string of length 1.
@@ -199,7 +198,6 @@ generate_rmd_file <- function(
         font_size = 12.,
         code = TRUE,
         font_path = get_fira_path(),
-        word_template_path = get_word_template_path(),
         ...) {
 
     output_format <- match.arg(output_format)
@@ -224,7 +222,7 @@ generate_rmd_file <- function(
         "    highlight: arrow",
         switch(
             output_format,
-            word = paste0("    reference_docx: \"", word_template_path, "\""),
+            word = "",
             html = "monofont: \"Fira Code\"",
             pdf = c(
                 "    fig_crop: true",
@@ -329,9 +327,12 @@ generate_rmd_file <- function(
 #'
 #' @returns This function returns invisibly (with \code{invisible()}) a vector
 #' of length two with two element:
-#' - the path of the created rmarkdown (template) document (\code{.Rmd})
-#' - the path of the created output (in the format \code{.pdf}, \code{.docx} or
+#'
+#' \itemize{
+#' \item the path of the created rmarkdown (template) document (\code{.Rmd});
+#' \item the path of the created output (in the format \code{.pdf}, \code{.docx} or
 #' \code{.html}).
+#' }
 #'
 #' @export
 #' @examples
@@ -390,7 +391,6 @@ render_code <- function(
         font_size = font_size,
         code = code,
         font_path = font_path,
-        word_template_path,
         ...
     )
 
@@ -414,8 +414,8 @@ render_code <- function(
         output_dir = out_dir,
         output_format = switch(
             output_format,
-            pdf = rmarkdown::pdf_document(pandoc_args = "markdown-auto_identifiers"),
-            word = rmarkdown::word_document(),
+            pdf = rmarkdown::pdf_document(pandoc_args = "-f markdown-auto_identifiers"),
+            word = rmarkdown::word_document(reference_docx = word_template_path),
             html = rmarkdown::html_document()
         )
     )

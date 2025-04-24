@@ -1,4 +1,4 @@
-devtools::load_all()
+
 latex_engine <- get_latex_engine()
 
 testthat::test_that("Everything works with default parameters", {

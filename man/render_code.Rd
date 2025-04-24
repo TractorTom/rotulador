@@ -46,8 +46,9 @@ echo = FALSE...)}
 \value{
 This function returns invisibly (with \code{invisible()}) a vector
 of length two with two element:
+
 \itemize{
-\item the path of the created rmarkdown (template) document (\code{.Rmd})
+\item the path of the created rmarkdown (template) document (\code{.Rmd});
 \item the path of the created output (in the format \code{.pdf}, \code{.docx} or
 \code{.html}).
 }

@@ -9,7 +9,7 @@ format."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">TBox</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,6 @@ format.</p>
 <span>  font_size <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  code <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  font_path <span class="op">=</span> <span class="fu"><a href="get_fira_path.html">get_fira_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  word_template_path <span class="op">=</span> <span class="fu"><a href="get_word_template_path.html">get_word_template_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -84,12 +83,6 @@ inserted in R chunk).</p></dd>
 It should link to a <code>.ttf</code> file. Only available in pdf format.</p></dd>
 
 
-<dt id="arg-word-template-path">word_template_path<a class="anchor" aria-label="anchor" href="#arg-word-template-path"></a></dt>
-<dd><p>a string. The path to the word template file used
-when rendering with word. By default, the template used is the one included
-in the package. Only used with word output.</p></dd>
-
-
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>other arguments passed to R chunk (for example
 <code>eval = TRUE</code>, <code>echo = FALSE</code>...)</p></dd>
@@ -111,24 +104,15 @@ function <code><a href="render_code.html">render_code</a></code>.</p>
 <span class="r-in"><span><span class="fu">generate_rmd_file</span><span class="op">(</span>content <span class="op">=</span> <span class="st">"Bonjour tout le monde"</span>,</span></span>
 <span class="r-in"><span>                  code <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>                  output_format <span class="op">=</span> <span class="st">"word"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "---"                                                                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "title: \"Format code\""                                                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "output:"                                                                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "  word_document:"                                                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "    highlight: arrow"                                                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "    reference_docx: \"/home/runner/work/_temp/Library/TBox/extdata/template.docx\""</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "code-block-bg: true"                                                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "code-block-border-left: \"#31BAE9\""                                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "---"                                                                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] ""                                                                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] ""                                                                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12] ""                                                                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] ""                                                                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14] "## Running Code"                                                                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15] ""                                                                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] ""                                                                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "Bonjour tout le monde"                                                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [18] ""                                                                                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "---"                                 "title: \"Format code\""             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "output:"                             "  word_document:"                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "    highlight: arrow"                ""                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "code-block-bg: true"                 "code-block-border-left: \"#31BAE9\""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "---"                                 ""                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] ""                                    ""                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] ""                                    "## Running Code"                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15] ""                                    ""                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "Bonjour tout le monde"               ""                                   </span>
 <span class="r-in"><span><span class="fu">generate_rmd_file</span><span class="op">(</span>content <span class="op">=</span> <span class="st">"print(AirPassengers)"</span>,</span></span>
 <span class="r-in"><span>                  code <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                  output_format <span class="op">=</span> <span class="st">"pdf"</span>,</span></span>

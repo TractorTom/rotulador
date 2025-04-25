@@ -74,16 +74,17 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * Add new dependencies: **knitr**` and **checkmate** to get all the different knitr options and to check the inputs of our functions
 
 
-## [0.1.0] - 2024-06-13 [CRAN release]
+## [0.1.0] - 2024-06-13
 
 ### Added
 
-* Initial commit
+* Initial commit [CRAN release]
 * new function render_code to render some code on-the-fly to produce PDF, HTML, word and other format quickly by using the clickboard
 
 
-[Unreleased]: https://github.com/TanguyBarthelemy/TBox/compare/v0.2.0...HEAD
-[0.1.2]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.3...v0.2.0
+[Unreleased]: https://github.com/TanguyBarthelemy/TBox/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/TanguyBarthelemy/TBox/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.3...v0.2.0
 [0.1.3]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.0...v0.1.1

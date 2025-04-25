@@ -163,8 +163,8 @@ generate_chunk_header <- function(...) {
 #' @param code a boolean. Should the \code{content} string have to be inserted
 #' in R chunk or is it just text? Default is TRUE (so the \code{content} will be
 #' inserted in R chunk).
-#' @param monofont_path a string. The path to the font used to render code chunks.
-#' It should link to a \code{.ttf} file. Only available in pdf format.
+#' @param monofont_path a string. The path to the font used to render code
+#' chunks. It should link to a \code{.ttf} file. Only available in pdf format.
 #' @param \dots other arguments passed to R chunk (for example
 #' \code{eval = TRUE}, \code{echo = FALSE}...)
 #' @returns a string of length 1.
@@ -279,8 +279,8 @@ generate_rmd_file <- function(
 #' inserted in R chunk).
 #' @param open a boolean. Default is TRUE meaning that the document will open
 #' automatically after being generated.
-#' @param monofont_path a string. The path to the font used to render code chunks.
-#' It should link to a \code{.ttf} file. Only available in pdf format.
+#' @param monofont_path a string. The path to the font used to render code
+#' chunks. It should link to a \code{.ttf} file. Only available in pdf format.
 #' @param word_template_path a string. The path to the word template file used
 #' when rendering with word. By default, the template used is the one included
 #' in the package. Only used with word output.
@@ -320,8 +320,8 @@ generate_rmd_file <- function(
 #'
 #' \itemize{
 #' \item the path of the created rmarkdown (template) document (\code{.Rmd});
-#' \item the path of the created output (in the format \code{.pdf}, \code{.docx} or
-#' \code{.html}).
+#' \item the path of the created output (in the format \code{.pdf},
+#' \code{.docx} or \code{.html}).
 #' }
 #'
 #' @export
@@ -363,7 +363,8 @@ render_code <- function(
         return(clipr::dr_clipr())
     }
 
-    monofont_path <- normalizePath(monofont_path, winslash = "/", mustWork = TRUE)
+    monofont_path <- normalizePath(monofont_path, winslash = "/",
+                                   mustWork = TRUE)
     word_template_path <- normalizePath(word_template_path, winslash = "/",
                                         mustWork = TRUE)
 
@@ -414,7 +415,6 @@ render_code <- function(
             output_format,
             pdf = rmarkdown::pdf_document(
                 highlight = "arrow",
-                # pandoc_args = "-f markdown-auto_identifiers",
                 fig_crop = TRUE,
                 keep_tex = TRUE,
                 latex_engine = latex_engine

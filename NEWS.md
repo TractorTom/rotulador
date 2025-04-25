@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+* lint package
+
 ### Changed
 
 * The rendering calls new Pandoc args for PDF and use the word template for word

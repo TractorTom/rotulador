@@ -3,7 +3,8 @@ latex_engine <- get_latex_engine()
 
 testthat::test_that("Everything works with default parameters", {
 
-    exp1 <- readLines(testthat::test_path("template_rmd", "default", "template_word.Rmd"))
+    exp1 <- readLines(testthat::test_path("template_rmd", "default",
+                                          "template_word.Rmd"))
     obj1_a <- generate_rmd_file(
         output_format = "word",
         content = "plot(AirPassengers)",
@@ -19,7 +20,8 @@ testthat::test_that("Everything works with default parameters", {
     testthat::expect_identical(object = obj1_b, expected = exp1)
 
 
-    exp2 <- readLines(testthat::test_path("template_rmd", "default", "template_html.Rmd"))
+    exp2 <- readLines(testthat::test_path("template_rmd", "default",
+                                          "template_html.Rmd"))
     obj2_a <- generate_rmd_file(output_format = "html",
                                 content = "plot(AirPassengers)")
     obj2_b <- generate_rmd_file(output_format = "html_document",
@@ -29,7 +31,11 @@ testthat::test_that("Everything works with default parameters", {
     testthat::expect_identical(object = obj2_b, expected = exp2)
 
 
-    exp3 <- readLines(testthat::test_path("template_rmd", "default", paste0("template_pdf_", latex_engine, ".Rmd")))
+    exp3 <- readLines(testthat::test_path(
+        "template_rmd",
+        "default",
+        paste0("template_pdf_", latex_engine, ".Rmd")
+    ))
     obj3_a <- generate_rmd_file(
         output_format = "pdf",
         content = "plot(AirPassengers)",
@@ -47,7 +53,8 @@ testthat::test_that("Everything works with default parameters", {
 
 testthat::test_that("Everything works with custom parameters", {
 
-    exp1 <- readLines(testthat::test_path("template_rmd", "custom", "template_word_1.Rmd"))
+    exp1 <- readLines(testthat::test_path("template_rmd", "custom",
+                                          "template_word_1.Rmd"))
     obj1_a <- generate_rmd_file(
         output_format = "word",
         content = "Bonjour tout le monde",
@@ -65,7 +72,8 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj1_b, expected = exp1)
 
 
-    exp2 <- readLines(testthat::test_path("template_rmd", "custom", "template_html_1.Rmd"))
+    exp2 <- readLines(testthat::test_path("template_rmd", "custom",
+                                          "template_html_1.Rmd"))
     obj2_a <- generate_rmd_file(output_format = "html",
                                 content = "Bonjour tout le monde",
                                 code = FALSE)
@@ -77,7 +85,11 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj2_b, expected = exp2)
 
 
-    exp3 <- readLines(testthat::test_path("template_rmd", "custom", paste0("template_pdf_", latex_engine, "_1.Rmd")))
+    exp3 <- readLines(testthat::test_path(
+        "template_rmd",
+        "custom",
+        paste0("template_pdf_", latex_engine, "_1.Rmd")
+    ))
     obj3_a <- generate_rmd_file(
         output_format = "pdf",
         content = "Bonjour tout le monde",
@@ -93,7 +105,8 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj3_b, expected = exp3)
 
 
-    exp4 <- readLines(testthat::test_path("template_rmd", "custom", "template_word_2.Rmd"))
+    exp4 <- readLines(testthat::test_path("template_rmd", "custom",
+                                          "template_word_2.Rmd"))
     obj4_a <- generate_rmd_file(
         output_format = "word",
         content = "plot(AirPassengers)",
@@ -111,7 +124,8 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj4_b, expected = exp4)
 
 
-    exp5 <- readLines(testthat::test_path("template_rmd", "custom", "template_html_2.Rmd"))
+    exp5 <- readLines(testthat::test_path("template_rmd", "custom",
+                                          "template_html_2.Rmd"))
     obj5_a <- generate_rmd_file(output_format = "html",
                                 content = "plot(AirPassengers)",
                                 eval = TRUE)
@@ -123,7 +137,11 @@ testthat::test_that("Everything works with custom parameters", {
     testthat::expect_identical(object = obj5_b, expected = exp5)
 
 
-    exp6 <- readLines(testthat::test_path("template_rmd", "custom", paste0("template_pdf_", latex_engine, "_2.Rmd")))
+    exp6 <- readLines(testthat::test_path(
+        "template_rmd",
+        "custom",
+        paste0("template_pdf_", latex_engine, "_2.Rmd")
+    ))
     obj6_a <- generate_rmd_file(
         output_format = "pdf",
         content = "plot(AirPassengers)",

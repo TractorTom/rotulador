@@ -217,7 +217,7 @@ generate_rmd_file <- function(
         "---",
         "title: \"Format code\"",
         paste0("output: ", output_format, "_document"),
-        "monofont: \"Fira Code\"",
+        ifelse(output_format == "html", "monofont: \"Fira Code\"", ""),
         "code-block-bg: true",
         "code-block-border-left: \"#31BAE9\"",
         "---",

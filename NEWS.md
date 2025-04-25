@@ -19,14 +19,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * Ligature added in Word and HTML files
 
 
-## [0.2.1] - 25/03/2025
+## [0.2.1] - 2025-03-25
 
 ### Changed
 
 * add `keep-tex` to keep the .tex filegenerated with pdf output
 
 
-## [0.2.0] - 22/01/2025
+## [0.2.0] - 2025-01-22
 
 ### Fixed
 
@@ -41,7 +41,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * New functions to import and export data in csv format
 
 
-## [0.1.3] - 23/08/2024
+## [0.1.3] - 2024-08-23
 
 ### Removed
 
@@ -56,7 +56,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * template for word generated files
 
 
-## [0.1.2] - 14/06/2024
+## [0.1.2] - 2024-06-14
 
 ### Added 
 
@@ -66,7 +66,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * test coverage with `pandoc`, **{tinytex}** and `xclip` (for **Ubuntu**) installed
 
 
-## [0.1.1]
+## [0.1.1] - 2024-06-13
 
 ### Changed
 
@@ -74,7 +74,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * Add new dependencies: **knitr**` and **checkmate** to get all the different knitr options and to check the inputs of our functions
 
 
-## [0.1.0] - CRAN release
+## [0.1.0] - 2024-06-13 [CRAN release]
 
 ### Added
 

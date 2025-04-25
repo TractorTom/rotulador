@@ -15,6 +15,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 * New function to detect latex-engine
 * tests for render_code
+* style.css file
+* Ligature added in Word and HTML files
 
 
 ## [0.2.1] - 25/03/2025

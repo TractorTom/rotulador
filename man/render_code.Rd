@@ -11,7 +11,7 @@ render_code(
   font_size = 12,
   code = TRUE,
   open = TRUE,
-  font_path = get_fira_path(),
+  monofont_path = get_fira_path(),
   word_template_path = get_word_template_path(),
   ...
 )
@@ -33,7 +33,7 @@ inserted in R chunk).}
 \item{open}{a boolean. Default is TRUE meaning that the document will open
 automatically after being generated.}
 
-\item{font_path}{a string. The path to the font used to render code chunks.
+\item{monofont_path}{a string. The path to the font used to render code chunks.
 It should link to a \code{.ttf} file. Only available in pdf format.}
 
 \item{word_template_path}{a string. The path to the word template file used

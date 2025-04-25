@@ -163,7 +163,7 @@ generate_chunk_header <- function(...) {
 #' @param code a boolean. Should the \code{content} string have to be inserted
 #' in R chunk or is it just text? Default is TRUE (so the \code{content} will be
 #' inserted in R chunk).
-#' @param font_path a string. The path to the font used to render code chunks.
+#' @param monofont_path a string. The path to the font used to render code chunks.
 #' It should link to a \code{.ttf} file. Only available in pdf format.
 #' @param \dots other arguments passed to R chunk (for example
 #' \code{eval = TRUE}, \code{echo = FALSE}...)
@@ -197,7 +197,7 @@ generate_rmd_file <- function(
                           "word_document", "pdf_document", "html_document"),
         font_size = 12.,
         code = TRUE,
-        font_path = get_fira_path(),
+        monofont_path = get_fira_path(),
         ...) {
 
     output_format <- match.arg(output_format)
@@ -213,46 +213,36 @@ generate_rmd_file <- function(
     # Check code
     checkmate::assert_logical(code)
 
-    latex_engine <- get_latex_engine()
     rmd_header <- c(
         "---",
         "title: \"Format code\"",
-        "output:",
-        paste0("  ", output_format, "_document:"),
-        "    highlight: arrow",
-        switch(
-            output_format,
-            word = "",
-            html = "monofont: \"Fira Code\"",
-            pdf = c(
-                "    fig_crop: true",
-                if (nzchar(latex_engine)) paste0("    latex_engine: ", latex_engine),
-                "    keep_tex: true"
-            )
-        ),
+        paste0("output: ", output_format, "_document"),
+        "monofont: \"Fira Code\"",
         "code-block-bg: true",
         "code-block-border-left: \"#31BAE9\"",
         "---",
         ""
     )
-    rmd_font_size <- ifelse(
-        test = (output_format == "pdf"),
-        yes = paste0("\\fontsize{", font_size, "}{", font_size, "}"),
-        no = ""
-    )
 
-    font_dir <- dirname(font_path)
-    font_file <- basename(font_path)
-
-    rmd_monofont <- ifelse(
-        test = (output_format == "pdf"
-                && latex_engine %in% c("xelatex", "lualatex")),
-        yes = paste0(
-            "\\setmonofont[ExternalLocation=",
-            font_dir, "/]{", font_file, "}"
-        ),
-        no = ""
-    )
+    rmd_font_latex <- ""
+    if (output_format == "pdf") {
+        rmd_font_latex <- paste0("\\fontsize{", font_size, "}{", font_size, "}")
+        latex_engine <- get_latex_engine()
+        if (latex_engine %in% c("xelatex", "lualatex")) {
+            font_dir <- dirname(monofont_path)
+            font_file <- basename(monofont_path)
+            rmd_font_latex <- c(
+                rmd_font_latex,
+                paste0(
+                    "\\setmonofont[ExternalLocation=",
+                    font_dir, "/]{", font_file, "}"
+                ),
+                "\\makeatletter",
+                "\\def\\verbatim@nolig@list{}",
+                "\\makeatother"
+            )
+        }
+    }
 
     rmd_body <- c(
         "",
@@ -271,7 +261,7 @@ generate_rmd_file <- function(
         )
     )
 
-    return(c(rmd_header, rmd_font_size, rmd_monofont, rmd_body))
+    return(c(rmd_header, rmd_font_latex, rmd_body))
 }
 
 #' @title Generate a file with formatted code
@@ -289,7 +279,7 @@ generate_rmd_file <- function(
 #' inserted in R chunk).
 #' @param open a boolean. Default is TRUE meaning that the document will open
 #' automatically after being generated.
-#' @param font_path a string. The path to the font used to render code chunks.
+#' @param monofont_path a string. The path to the font used to render code chunks.
 #' It should link to a \code{.ttf} file. Only available in pdf format.
 #' @param word_template_path a string. The path to the word template file used
 #' when rendering with word. By default, the template used is the one included
@@ -365,7 +355,7 @@ render_code <- function(
         font_size = 12.,
         code = TRUE,
         open = TRUE,
-        font_path = get_fira_path(),
+        monofont_path = get_fira_path(),
         word_template_path = get_word_template_path(),
         ...) {
 
@@ -373,7 +363,7 @@ render_code <- function(
         return(clipr::dr_clipr())
     }
 
-    font_path <- normalizePath(font_path, winslash = "/", mustWork = TRUE)
+    monofont_path <- normalizePath(monofont_path, winslash = "/", mustWork = TRUE)
     word_template_path <- normalizePath(word_template_path, winslash = "/",
                                         mustWork = TRUE)
 
@@ -385,12 +375,20 @@ render_code <- function(
                           replacement = "",
                           perl = TRUE, fixed = FALSE)
 
+    if (output_format == "pdf") {
+        latex_engine <- get_latex_engine()
+    }
+    if (output_format == "html") {
+        style_file <-  system.file("extdata", "style.css", package = "TBox")
+        style_file <- normalizePath(style_file, winslash = "/", mustWork = TRUE)
+    }
+
     rmd_content <- generate_rmd_file(
         content = content,
         output_format = output_format,
         font_size = font_size,
         code = code,
-        font_path = font_path,
+        monofont_path = monofont_path,
         ...
     )
 
@@ -414,9 +412,21 @@ render_code <- function(
         output_dir = out_dir,
         output_format = switch(
             output_format,
-            pdf = rmarkdown::pdf_document(pandoc_args = "-f markdown-auto_identifiers"),
-            word = rmarkdown::word_document(reference_docx = word_template_path),
-            html = rmarkdown::html_document()
+            pdf = rmarkdown::pdf_document(
+                highlight = "arrow",
+                # pandoc_args = "-f markdown-auto_identifiers",
+                fig_crop = TRUE,
+                keep_tex = TRUE,
+                latex_engine = latex_engine
+            ),
+            word = rmarkdown::word_document(
+                highlight = "arrow",
+                reference_docx = word_template_path
+            ),
+            html = rmarkdown::html_document(
+                highlight = "arrow",
+                css = style_file
+            )
         )
     )
 

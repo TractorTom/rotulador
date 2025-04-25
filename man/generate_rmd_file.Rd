@@ -10,7 +10,7 @@ generate_rmd_file(
     "html_document"),
   font_size = 12,
   code = TRUE,
-  font_path = get_fira_path(),
+  monofont_path = get_fira_path(),
   ...
 )
 }
@@ -28,7 +28,7 @@ accepted.}
 in R chunk or is it just text? Default is TRUE (so the \code{content} will be
 inserted in R chunk).}
 
-\item{font_path}{a string. The path to the font used to render code chunks.
+\item{monofont_path}{a string. The path to the font used to render code chunks.
 It should link to a \code{.ttf} file. Only available in pdf format.}
 
 \item{\dots}{other arguments passed to R chunk (for example

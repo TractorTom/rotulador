@@ -8,9 +8,7 @@ generate_rmd_file(
   content,
   output_format = c("word", "pdf", "html", "word_document", "pdf_document",
     "html_document"),
-  font_size = 12,
   code = TRUE,
-  monofont_path = get_fira_path(),
   ...
 )
 }
@@ -22,20 +20,16 @@ generate_rmd_file(
 \code{"pdf_document"}, \code{"html_document"} or \code{"word_document"} are
 accepted.}
 
-\item{font_size}{a numeric. The font size, only available in pdf format.}
-
 \item{code}{a boolean. Should the \code{content} string have to be inserted
 in R chunk or is it just text? Default is TRUE (so the \code{content} will be
 inserted in R chunk).}
-
-\item{monofont_path}{a string. The path to the font used to render code chunks.
-It should link to a \code{.ttf} file. Only available in pdf format.}
 
 \item{\dots}{other arguments passed to R chunk (for example
 \code{eval = TRUE}, \code{echo = FALSE}...)}
 }
 \value{
-a string of length 1.
+a vector of characters representing an Rmd file (each element being
+a line)
 }
 \description{
 This function creates the Rmd file which will be rendered in a specific

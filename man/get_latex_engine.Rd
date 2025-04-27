@@ -2,7 +2,7 @@
 % Please edit documentation in R/format_code.R
 \name{get_latex_engine}
 \alias{get_latex_engine}
-\title{The latex}
+\title{The latex engine}
 \usage{
 get_latex_engine()
 }

@@ -24,7 +24,7 @@ render_code(
 \item{browser}{a string. The path to the browser which will open the
 generated file format}
 
-\item{font_size}{a numeric. The font size in pdf format.}
+\item{font_size}{a numeric. The font size, only available in pdf format.}
 
 \item{code}{a boolean. Should the copied content have to be inserted in R
 chunk or is it just text? Default is TRUE (so the copied content will be
@@ -33,8 +33,8 @@ inserted in R chunk).}
 \item{open}{a boolean. Default is TRUE meaning that the document will open
 automatically after being generated.}
 
-\item{monofont_path}{a string. The path to the font used to render code chunks.
-It should link to a \code{.ttf} file. Only available in pdf format.}
+\item{monofont_path}{a string. The path to the font used to render code
+chunks. It should link to a \code{.ttf} file. Only available in pdf format.}
 
 \item{word_template_path}{a string. The path to the word template file used
 when rendering with word. By default, the template used is the one included
@@ -49,8 +49,8 @@ of length two with two element:
 
 \itemize{
 \item the path of the created rmarkdown (template) document (\code{.Rmd});
-\item the path of the created output (in the format \code{.pdf}, \code{.docx} or
-\code{.html}).
+\item the path of the created output (in the format \code{.pdf},
+\code{.docx} or \code{.html}).
 }
 }
 \description{

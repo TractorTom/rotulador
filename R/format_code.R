@@ -1,5 +1,5 @@
 
-#' @title The latex
+#' @title The latex engine
 #'
 #' @description
 #' This function returns the latex engine available to render .tex file into
@@ -34,6 +34,52 @@ get_latex_engine <- function() {
     } else {
         return("")
     }
+}
+
+#' @title Create preamble .tex for code font
+#'
+#' @param font_size a numeric. The font size, only available in pdf format.
+#' @param monofont_path a string. The path to the font used to render code
+#' chunks. It should link to a \code{.ttf} file. Only available in pdf format.
+#'
+#' @returns a vector of characters representing an Rmd file (each element being
+#' a line)
+#'
+#' @export
+#'
+#' @examples
+#'
+#' create_preamble_tex()
+#' create_preamble_tex(font_size = 18.0)
+#'
+create_preamble_tex <- function(
+        font_size = 12.0,
+        monofont_path = get_fira_path()) {
+
+    # Check
+    checkmate::assert_number(x = font_size, lower = 1L, na.ok = FALSE,
+                             null.ok = FALSE, finite = TRUE)
+    monofont_path <- normalizePath(monofont_path, winslash = "/",
+                                   mustWork = TRUE)
+
+    latex_engine <- get_latex_engine()
+    preamble_tex <- paste0("\\fontsize{", font_size, "}{", font_size, "}")
+    if (latex_engine %in% c("xelatex", "lualatex")) {
+        font_dir <- dirname(monofont_path)
+        font_file <- basename(monofont_path)
+        preamble_tex <- c(
+            preamble_tex,
+            paste0(
+                "\\setmonofont[ExternalLocation=",
+                font_dir, "/]{", font_file, "}"
+            ),
+            "\\makeatletter",
+            "\\def\\verbatim@nolig@list{}",
+            "\\makeatother"
+        )
+    }
+
+    return(preamble_tex)
 }
 
 #' @title The path to the font Fira Code
@@ -87,6 +133,7 @@ get_word_template_path <- function() {
 }
 
 #' @title Generate R chunk header
+#'
 #' @description
 #' Function to generate R chunk header for rmarkdown rendering in different
 #' output
@@ -159,15 +206,14 @@ generate_chunk_header <- function(...) {
 #' \code{"pdf"}, \code{"html"} or \code{"word"} and their knitr equivalent
 #' \code{"pdf_document"}, \code{"html_document"} or \code{"word_document"} are
 #' accepted.
-#' @param font_size a numeric. The font size, only available in pdf format.
 #' @param code a boolean. Should the \code{content} string have to be inserted
 #' in R chunk or is it just text? Default is TRUE (so the \code{content} will be
 #' inserted in R chunk).
-#' @param monofont_path a string. The path to the font used to render code
-#' chunks. It should link to a \code{.ttf} file. Only available in pdf format.
 #' @param \dots other arguments passed to R chunk (for example
 #' \code{eval = TRUE}, \code{echo = FALSE}...)
-#' @returns a string of length 1.
+#'
+#' @returns a vector of characters representing an Rmd file (each element being
+#' a line)
 #'
 #' @details
 #' More information about the argument \dots in the  documentation of the
@@ -195,9 +241,7 @@ generate_rmd_file <- function(
         content,
         output_format = c("word", "pdf", "html",
                           "word_document", "pdf_document", "html_document"),
-        font_size = 12.,
         code = TRUE,
-        monofont_path = get_fira_path(),
         ...) {
 
     output_format <- match.arg(output_format)
@@ -208,8 +252,6 @@ generate_rmd_file <- function(
 
     # Check content
     checkmate::assert_character(content)
-    # Check font_size
-    checkmate::assert_count(font_size)
     # Check code
     checkmate::assert_logical(code)
 
@@ -217,51 +259,22 @@ generate_rmd_file <- function(
         "---",
         "title: \"Format code\"",
         paste0("output: ", output_format, "_document"),
-        ifelse(output_format == "html", "monofont: \"Fira Code\"", ""),
         "code-block-bg: true",
         "code-block-border-left: \"#31BAE9\"",
         "---",
         ""
     )
 
-    rmd_font_latex <- ""
-    if (output_format == "pdf") {
-        rmd_font_latex <- paste0("\\fontsize{", font_size, "}{", font_size, "}")
-        latex_engine <- get_latex_engine()
-        if (latex_engine %in% c("xelatex", "lualatex")) {
-            font_dir <- dirname(monofont_path)
-            font_file <- basename(monofont_path)
-            rmd_font_latex <- c(
-                rmd_font_latex,
-                paste0(
-                    "\\setmonofont[ExternalLocation=",
-                    font_dir, "/]{", font_file, "}"
-                ),
-                "\\makeatletter",
-                "\\def\\verbatim@nolig@list{}",
-                "\\makeatother"
-            )
-        }
-    }
-
     rmd_body <- c(
         "",
         "## Running Code",
         "",
-        ifelse(
-            test = code,
-            yes = generate_chunk_header(...),
-            no = ""
-        ),
+        ifelse(test = code, yes = generate_chunk_header(...), no = ""),
         content,
-        ifelse(
-            test = code,
-            yes = "```",
-            no = ""
-        )
+        ifelse(test = code, yes = "```", no = "")
     )
 
-    return(c(rmd_header, rmd_font_latex, rmd_body))
+    return(c(rmd_header, rmd_body))
 }
 
 #' @title Generate a file with formatted code
@@ -273,19 +286,17 @@ generate_rmd_file <- function(
 #' "html_document" or "word_document" are accepted.
 #' @param browser a string. The path to the browser which will open the
 #' generated file format
-#' @param font_size a numeric. The font size in pdf format.
 #' @param code a boolean. Should the copied content have to be inserted in R
 #' chunk or is it just text? Default is TRUE (so the copied content will be
 #' inserted in R chunk).
 #' @param open a boolean. Default is TRUE meaning that the document will open
 #' automatically after being generated.
-#' @param monofont_path a string. The path to the font used to render code
-#' chunks. It should link to a \code{.ttf} file. Only available in pdf format.
 #' @param word_template_path a string. The path to the word template file used
 #' when rendering with word. By default, the template used is the one included
 #' in the package. Only used with word output.
 #' @param ... other arguments passed to R chunk (for example eval = TRUE,
 #' echo = FALSE...)
+#' @inheritParams create_preamble_tex
 #'
 #' @details
 #' This function allows the user to generate formatted code (for email,
@@ -352,7 +363,7 @@ render_code <- function(
         output_format = c("word", "pdf", "html",
                           "word_document", "pdf_document", "html_document"),
         browser = getOption("browser"),
-        font_size = 12.,
+        font_size = 12.0,
         code = TRUE,
         open = TRUE,
         monofont_path = get_fira_path(),
@@ -363,12 +374,13 @@ render_code <- function(
         return(clipr::dr_clipr())
     }
 
+    # Check
+    checkmate::assert_number(x = font_size, lower = 1L, na.ok = FALSE,
+                             null.ok = FALSE, finite = TRUE)
     monofont_path <- normalizePath(monofont_path, winslash = "/",
                                    mustWork = TRUE)
     word_template_path <- normalizePath(word_template_path, winslash = "/",
                                         mustWork = TRUE)
-
-    content <- clipr::read_clip(allow_non_interactive = TRUE)
 
     output_format <- match.arg(output_format)
     output_format <- gsub(x = output_format,
@@ -376,22 +388,8 @@ render_code <- function(
                           replacement = "",
                           perl = TRUE, fixed = FALSE)
 
-    if (output_format == "pdf") {
-        latex_engine <- get_latex_engine()
-    }
-    if (output_format == "html") {
-        style_file <-  system.file("extdata", "style.css", package = "TBox")
-        style_file <- normalizePath(style_file, winslash = "/", mustWork = TRUE)
-    }
-
-    rmd_content <- generate_rmd_file(
-        content = content,
-        output_format = output_format,
-        font_size = font_size,
-        code = code,
-        monofont_path = monofont_path,
-        ...
-    )
+    checkmate::assert_logical(code)
+    checkmate::assert_logical(open)
 
     ext <- switch(
         output_format,
@@ -406,10 +404,30 @@ render_code <- function(
     rmd_file <- file.path(out_dir, "template.Rmd")
     out_file <- file.path(out_dir, paste0("output", ext))
 
+    if (output_format == "pdf") {
+        latex_engine <- get_latex_engine()
+        preamble_tex <- create_preamble_tex(font_size, monofont_path)
+        preamble_file <- file.path(out_dir, "preamble.tex")
+        write(preamble_tex, file = preamble_file)
+    }
+    if (output_format == "html") {
+        style_file <-  system.file("extdata", "style.css", package = "TBox")
+        style_file <- normalizePath(style_file, winslash = "/", mustWork = TRUE)
+    }
+
+    content <- clipr::read_clip(allow_non_interactive = TRUE)
+    rmd_content <- generate_rmd_file(
+        content = content,
+        output_format = output_format,
+        code = code,
+        ...
+    )
+
     write(rmd_content, file = rmd_file)
+
     rmarkdown::render(
         input = rmd_file,
-        output_file = paste0("output", ext),
+        output_file = basename(out_file),
         output_dir = out_dir,
         output_format = switch(
             output_format,
@@ -417,7 +435,8 @@ render_code <- function(
                 highlight = "arrow",
                 fig_crop = TRUE,
                 keep_tex = TRUE,
-                latex_engine = latex_engine
+                latex_engine = latex_engine,
+                includes = rmarkdown::includes(before_body = preamble_file)
             ),
             word = rmarkdown::word_document(
                 highlight = "arrow",

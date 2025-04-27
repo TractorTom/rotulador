@@ -19,6 +19,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 * New function to detect latex-engine
+* New function to create preamble.tex
+* Checks for render_code
 * tests for render_code
 * style.css file
 * Ligature added in Word and HTML files

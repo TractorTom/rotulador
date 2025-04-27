@@ -1,6 +1,6 @@
 ---
 title: "Format code"
-output: word_document
+output: pdf_document
 code-block-bg: true
 code-block-border-left: "#31BAE9"
 ---
@@ -8,6 +8,6 @@ code-block-border-left: "#31BAE9"
 
 ## Running Code
 
-```{r, eval = TRUE}
-plot(AirPassengers)
-```
+
+Bonjour tout le monde
+

@@ -1,16 +1,10 @@
 ---
 title: "Format code"
-output:
-  pdf_document:
-    highlight: arrow
-    fig_crop: true
-    latex_engine: pdflatex
-    keep_tex: true
+output: pdf_document
 code-block-bg: true
 code-block-border-left: "#31BAE9"
 ---
 
-\fontsize{12}{12}
 
 ## Running Code
 

@@ -1,19 +1,15 @@
 
-latex_engine <- get_latex_engine()
-
 testthat::test_that("Everything works with default parameters", {
 
     exp1 <- readLines(testthat::test_path("template_rmd", "default",
                                           "template_word.Rmd"))
     obj1_a <- generate_rmd_file(
         output_format = "word",
-        content = "plot(AirPassengers)",
-        word_template_path = file.path("User", "template.docx")
+        content = "plot(AirPassengers)"
     )
     obj1_b <- generate_rmd_file(
         output_format = "word_document",
-        content = "plot(AirPassengers)",
-        word_template_path = file.path("User", "template.docx")
+        content = "plot(AirPassengers)"
     )
 
     testthat::expect_identical(object = obj1_a, expected = exp1)
@@ -34,17 +30,15 @@ testthat::test_that("Everything works with default parameters", {
     exp3 <- readLines(testthat::test_path(
         "template_rmd",
         "default",
-        paste0("template_pdf_", latex_engine, ".Rmd")
+        paste0("template_pdf.Rmd")
     ))
     obj3_a <- generate_rmd_file(
         output_format = "pdf",
-        content = "plot(AirPassengers)",
-        font_path = file.path("User", "FiraCode-Regular.ttf")
+        content = "plot(AirPassengers)"
     )
     obj3_b <- generate_rmd_file(
         output_format = "pdf_document",
-        content = "plot(AirPassengers)",
-        font_path = file.path("User", "FiraCode-Regular.ttf")
+        content = "plot(AirPassengers)"
     )
 
     testthat::expect_identical(object = obj3_a, expected = exp3)
@@ -58,14 +52,12 @@ testthat::test_that("Everything works with custom parameters", {
     obj1_a <- generate_rmd_file(
         output_format = "word",
         content = "Bonjour tout le monde",
-        code = FALSE,
-        word_template_path = file.path("User", "template.docx")
+        code = FALSE
     )
     obj1_b <- generate_rmd_file(
         output_format = "word_document",
         content = "Bonjour tout le monde",
-        code = FALSE,
-        word_template_path = file.path("User", "template.docx")
+        code = FALSE
     )
 
     testthat::expect_identical(object = obj1_a, expected = exp1)
@@ -88,17 +80,17 @@ testthat::test_that("Everything works with custom parameters", {
     exp3 <- readLines(testthat::test_path(
         "template_rmd",
         "custom",
-        paste0("template_pdf_", latex_engine, "_1.Rmd")
+        paste0("template_pdf_1.Rmd")
     ))
     obj3_a <- generate_rmd_file(
         output_format = "pdf",
         content = "Bonjour tout le monde",
-        code = FALSE, font_path = file.path("User", "FiraCode-Regular.ttf")
+        code = FALSE
     )
     obj3_b <- generate_rmd_file(
         output_format = "pdf_document",
         content = "Bonjour tout le monde",
-        code = FALSE, font_path = file.path("User", "FiraCode-Regular.ttf")
+        code = FALSE
     )
 
     testthat::expect_identical(object = obj3_a, expected = exp3)
@@ -110,14 +102,12 @@ testthat::test_that("Everything works with custom parameters", {
     obj4_a <- generate_rmd_file(
         output_format = "word",
         content = "plot(AirPassengers)",
-        eval = TRUE,
-        word_template_path = file.path("User", "template.docx")
+        eval = TRUE
     )
     obj4_b <- generate_rmd_file(
         output_format = "word_document",
         content = "plot(AirPassengers)",
-        eval = TRUE,
-        word_template_path = file.path("User", "template.docx")
+        eval = TRUE
     )
 
     testthat::expect_identical(object = obj4_a, expected = exp4)
@@ -140,17 +130,17 @@ testthat::test_that("Everything works with custom parameters", {
     exp6 <- readLines(testthat::test_path(
         "template_rmd",
         "custom",
-        paste0("template_pdf_", latex_engine, "_2.Rmd")
+        paste0("template_pdf_2.Rmd")
     ))
     obj6_a <- generate_rmd_file(
         output_format = "pdf",
         content = "plot(AirPassengers)",
-        eval = TRUE, font_path = file.path("User", "FiraCode-Regular.ttf")
+        eval = TRUE
     )
     obj6_b <- generate_rmd_file(
         output_format = "pdf_document",
         content = "plot(AirPassengers)",
-        eval = TRUE, font_path = file.path("User", "FiraCode-Regular.ttf")
+        eval = TRUE
     )
 
     testthat::expect_identical(object = obj6_a, expected = exp6)

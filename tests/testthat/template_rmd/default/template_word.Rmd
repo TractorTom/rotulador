@@ -1,14 +1,9 @@
 ---
 title: "Format code"
-output:
-  word_document:
-    highlight: arrow
-    reference_docx: "User/template.docx"
+output: word_document
 code-block-bg: true
 code-block-border-left: "#31BAE9"
 ---
-
-
 
 
 ## Running Code

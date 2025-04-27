@@ -46,9 +46,7 @@ format.</p>
 <span>  <span class="va">content</span>,</span>
 <span>  output_format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"word"</span>, <span class="st">"pdf"</span>, <span class="st">"html"</span>, <span class="st">"word_document"</span>, <span class="st">"pdf_document"</span>,</span>
 <span>    <span class="st">"html_document"</span><span class="op">)</span>,</span>
-<span>  font_size <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  code <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  monofont_path <span class="op">=</span> <span class="fu"><a href="get_fira_path.html">get_fira_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -68,19 +66,10 @@ format.</p>
 accepted.</p></dd>
 
 
-<dt id="arg-font-size">font_size<a class="anchor" aria-label="anchor" href="#arg-font-size"></a></dt>
-<dd><p>a numeric. The font size, only available in pdf format.</p></dd>
-
-
 <dt id="arg-code">code<a class="anchor" aria-label="anchor" href="#arg-code"></a></dt>
 <dd><p>a boolean. Should the <code>content</code> string have to be inserted
 in R chunk or is it just text? Default is TRUE (so the <code>content</code> will be
 inserted in R chunk).</p></dd>
-
-
-<dt id="arg-monofont-path">monofont_path<a class="anchor" aria-label="anchor" href="#arg-monofont-path"></a></dt>
-<dd><p>a string. The path to the font used to render code chunks.
-It should link to a <code>.ttf</code> file. Only available in pdf format.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -90,7 +79,8 @@ It should link to a <code>.ttf</code> file. Only available in pdf format.</p></d
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a string of length 1.</p>
+    <p>a vector of characters representing an Rmd file (each element being
+a line)</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

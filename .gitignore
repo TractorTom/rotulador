@@ -56,3 +56,6 @@ rsconnect/
 
 # produced README.html
 README.html
+
+# autoimport cache
+inst/autoimport_cache.rds

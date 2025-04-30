@@ -25,6 +25,7 @@
 #'
 #' df <- get_data(file_path, erase_zero = FALSE)
 #'
+#' @importFrom utils read.csv
 get_data <- function(path, erase_zero = TRUE, sep = ";", dec = ".", ...) {
     path <- normalizePath(path, mustWork = TRUE)
     data_read <- read.csv(
@@ -63,6 +64,7 @@ get_data <- function(path, erase_zero = TRUE, sep = ";", dec = ".", ...) {
 #' new_path <- tempfile("new_file", fileext = ".csv")
 #' write_data(data = mtcars, path = new_path)
 #'
+#' @importFrom utils write.table
 write_data <- function(data, path) {
     path <- normalizePath(path, mustWork = FALSE)
     write.table(

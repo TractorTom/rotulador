@@ -10,7 +10,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-* Rename {TBox} in {rotulador}
+* Rename **{TBox}** in **{rotulador}**
+
+### Removed
+
+* Functions to import and export data in csv format (`write_data()`, `get_data()`)
 
 
 ## [0.2.2] - 2025-04-29
@@ -86,8 +90,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-* `render_code()` now accept **knitr** chunk option as function arguments
-* Add new dependencies: **knitr**` and **checkmate** to get all the different knitr options and to check the inputs of our functions
+* `render_code()` now accept **{knitr}** chunk option as function arguments
+* Add new dependencies: **{knitr}**` and **{checkmate}** to get all the different {knitr} options and to check the inputs of our functions
 
 
 ## [0.1.0] - 2024-06-13
@@ -95,7 +99,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 * Initial commit [CRAN release]
-* new function render_code to render some code on-the-fly to produce PDF, HTML, word and other format quickly by using the clickboard
+* new function `render_code` to render some code on-the-fly to produce PDF, HTML, word and other format quickly by using the clickboard
 
 
 [Unreleased]: https://github.com/TractorTom/rotulador/compare/v0.2.2...HEAD

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rotulador: useful toolbox with random programs
+# {rotulador}
 
 <!-- badges: start -->
 
@@ -17,8 +17,9 @@ coverage](https://codecov.io/gh/TractorTom/rotulador/branch/main/graph/badge.svg
 built](https://github.com/TractorTom/rotulador/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/TractorTom/rotulador/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
-The goal of **rotulador** is to provide tool to help developers and
-producers manipulate R objects and outputs.
+The goal of **{rotulador}** is to provide functions for programming and
+generating documents in R. It’s a tools to help developers and producers
+manipulate R objects and outputs.
 
 ## Installation
 
@@ -31,3 +32,13 @@ remotes::install_github("TractorTom/rotulador")
 ```
 
 ## Example
+
+Formatage de code pour inclusion dans un rapport :
+
+``` r
+library("rotulador")
+
+code <- "x <- 1:10\nmean(x)"
+clipr::write_clip(code)
+render_code(code, format = "html")
+```

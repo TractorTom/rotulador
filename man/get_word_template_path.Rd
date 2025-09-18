@@ -11,7 +11,7 @@ a character vector of length 1 representing the path
 }
 \description{
 This function returns the path to the word template installed with
-the package TBox.
+the package rotulador.
 }
 \details{
 This function helps the other functions to find the template of the word

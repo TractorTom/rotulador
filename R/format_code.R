@@ -86,7 +86,7 @@ create_preamble_tex <- function(
 #'
 #' @description
 #' This function returns the path to the font Fira Code installed with
-#' the package TBox.
+#' the package rotulador.
 #'
 #' @returns a character vector of length 1 representing the path
 #'
@@ -101,7 +101,7 @@ create_preamble_tex <- function(
 #'
 get_fira_path <- function() {
     fira_path <- system.file("extdata", "FiraCode", "FiraCode-Regular.ttf",
-                             package = "TBox")
+                             package = "rotulador")
     fira_path <- normalizePath(fira_path, winslash = "/", mustWork = FALSE)
     return(fira_path)
 }
@@ -110,7 +110,7 @@ get_fira_path <- function() {
 #'
 #' @description
 #' This function returns the path to the word template installed with
-#' the package TBox.
+#' the package rotulador.
 #'
 #' @returns a character vector of length 1 representing the path
 #'
@@ -125,7 +125,7 @@ get_fira_path <- function() {
 #'
 get_word_template_path <- function() {
     word_template_path <- system.file("extdata", "template.docx",
-                                      package = "TBox")
+                                      package = "rotulador")
     word_template_path <- normalizePath(word_template_path,
                                         winslash = "/",
                                         mustWork = FALSE)
@@ -217,7 +217,7 @@ generate_chunk_header <- function(...) {
 #'
 #' @details
 #' More information about the argument \dots in the  documentation of the
-#' function \code{\link[TBox]{render_code}}.
+#' function \code{\link[rotulador]{render_code}}.
 #'
 #' @export
 #'
@@ -411,7 +411,7 @@ render_code <- function(
         write(preamble_tex, file = preamble_file)
     }
     if (output_format == "html") {
-        style_file <-  system.file("extdata", "style.css", package = "TBox")
+        style_file <-  system.file("extdata", "style.css", package = "rotulador")
         style_file <- normalizePath(style_file, winslash = "/", mustWork = TRUE)
     }
 

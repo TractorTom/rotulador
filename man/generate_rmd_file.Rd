@@ -37,7 +37,7 @@ format.
 }
 \details{
 More information about the argument \dots in the  documentation of the
-function \code{\link[TBox]{render_code}}.
+function \code{\link[rotulador]{render_code}}.
 }
 \examples{
 

@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library("testthat") # nolint unused_import_linter
-library("TBox") # nolint unused_import_linter
+library("rotulador") # nolint unused_import_linter
 
-test_check("TBox")
+test_check("rotulador")

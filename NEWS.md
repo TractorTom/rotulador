@@ -19,6 +19,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Changed
 
 * The rendering calls new Pandoc args for PDF and use the word template for word
+* Rename {TBox} in {rotulador}
 
 ### Added
 
@@ -93,11 +94,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * new function render_code to render some code on-the-fly to produce PDF, HTML, word and other format quickly by using the clickboard
 
 
-[Unreleased]: https://github.com/TanguyBarthelemy/TBox/compare/v0.2.2...HEAD
-[0.2.2]: https://github.com/TanguyBarthelemy/TBox/compare/v0.2.1...v0.2.2
-[0.2.1]: https://github.com/TanguyBarthelemy/TBox/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.3...v0.2.0
-[0.1.3]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.2...v0.1.3
-[0.1.2]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.1...v0.1.2
-[0.1.1]: https://github.com/TanguyBarthelemy/TBox/compare/v0.1.0...v0.1.1
-[0.1.0]: https://github.com/TanguyBarthelemy/TBox/releases/tag/v0.1.0
+[Unreleased]: https://github.com/TractorTom/rotulador/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/TractorTom/rotulador/compare/v0.2.1...v0.2.2
+[0.2.1]: https://github.com/TractorTom/rotulador/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/TractorTom/rotulador/compare/v0.1.3...v0.2.0
+[0.1.3]: https://github.com/TractorTom/rotulador/compare/v0.1.2...v0.1.3
+[0.1.2]: https://github.com/TractorTom/rotulador/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/TractorTom/rotulador/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/TractorTom/rotulador/releases/tag/v0.1.0

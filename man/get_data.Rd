@@ -29,7 +29,7 @@ Fonction de lecture de fichiers csv
 par defaul
 }
 \examples{
-file_path <- system.file("extdata", "file.csv", package = "TBox")
+file_path <- system.file("extdata", "file.csv", package = "rotulador")
 file_path <- normalizePath(file_path, winslash = "/", mustWork = FALSE)
 
 df <- get_data(file_path, erase_zero = FALSE)

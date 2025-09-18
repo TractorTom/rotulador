@@ -39,7 +39,7 @@ jobs:
       - name: Install R dependencies
         run: |
           install.packages("remotes")
-          remotes::install_github("TanguyBarthelemy/releaser")
+          remotes::install_github("TractorTom/releaser")
         shell: Rscript {0}
 
       - name: Check tag
@@ -68,7 +68,7 @@ jobs:
 
           desc_set_version(version = new_version, file = ".")
           update_news_md(new_version = new_version, path = ".",
-                         github_url = "https://github.com/TanguyBarthelemy/TBox")
+                         github_url = "https://github.com/TractorTom/rotulador")
         shell: Rscript {0}
         env:
           tag: ${{ steps.set-tag.outputs.tag }}
@@ -114,7 +114,7 @@ jobs:
           tag <- Sys.getenv("tag")
           new_version <- substr(tag, start = 2, stop = nchar(tag))
 
-          release_body <- paste0("# {TBox} [", new_version, "]\n\n", get_changes(path = ".", version = new_version))
+          release_body <- paste0("# {rotulador} [", new_version, "]\n\n", get_changes(path = ".", version = new_version))
 
           output_file <- Sys.getenv("GITHUB_OUTPUT")
 

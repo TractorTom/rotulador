@@ -1,15 +1,15 @@
-Package: TBox
+Package: rotulador
 Title: Useful Functions for Programming and Generating Documents
 Version: 0.2.2.9000
 Authors@R: 
-    person("Tanguy", "Barthelemy", , "tanguy.barthelemy@insee.fr", role = c("aut", "cre"))
+    person("Tanguy", "Barthelemy", , "tangbarth@hotmail.fr", role = c("aut", "cre"))
 Description: Tools to help developers and producers manipulate R objects
     and outputs. It includes tools for displaying results and objects, and
     for formatting them in the correct format.
 License: MIT + file LICENSE
-URL: https://github.com/TanguyBarthelemy/TBox,
-    https://tanguybarthelemy.github.io/TBox/
-BugReports: https://github.com/TanguyBarthelemy/TBox/issues
+URL: https://github.com/TractorTom/rotulador,
+    https://tractortom.github.io/rotulador/
+BugReports: https://github.com/TractorTom/rotulador/issues
 Depends:
     R (>= 3.6)
 Imports: 

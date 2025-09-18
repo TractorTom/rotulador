@@ -15,27 +15,27 @@ knitr::opts_chunk$set(
 )
 ```
 
-# TBox: usefull toolbox with random programs
+# rotulador: usefull toolbox with random programs
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/TBox)](https://CRAN.R-project.org/package=TBox)
+[![CRAN status](https://www.r-pkg.org/badges/version/rotulador)](https://CRAN.R-project.org/package=rotulador)
 
-[![R-CMD-check](https://github.com/TanguyBarthelemy/TBox/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TanguyBarthelemy/TBox/actions/workflows/R-CMD-check.yaml)
-[![Test coverage](https://codecov.io/gh/TanguyBarthelemy/TBox/branch/main/graph/badge.svg)](https://app.codecov.io/gh/TanguyBarthelemy/TBox?branch=main)
-[![CodeFactor](https://www.codefactor.io/repository/github/tanguybarthelemy/tbox/badge/main)](https://www.codefactor.io/repository/github/tanguybarthelemy/tbox/overview/main)
-[![lint](https://github.com/TanguyBarthelemy/TBox/actions/workflows/lint.yaml/badge.svg)](https://github.com/TanguyBarthelemy/TBox/actions/workflows/lint.yaml)
-[![GH Pages built](https://github.com/TanguyBarthelemy/TBox/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/TanguyBarthelemy/TBox/actions/workflows/pkgdown.yaml)
+[![R-CMD-check](https://github.com/TractorTom/rotulador/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TractorTom/rotulador/actions/workflows/R-CMD-check.yaml)
+[![Test coverage](https://codecov.io/gh/TractorTom/rotulador/branch/main/graph/badge.svg)](https://app.codecov.io/gh/TractorTom/rotulador?branch=main)
+[![CodeFactor](https://www.codefactor.io/repository/github/tractortom/rotulador/badge/main)](https://www.codefactor.io/repository/github/tractortom/rotulador/overview/main)
+[![lint](https://github.com/TractorTom/rotulador/actions/workflows/lint.yaml/badge.svg)](https://github.com/TractorTom/rotulador/actions/workflows/lint.yaml)
+[![GH Pages built](https://github.com/TractorTom/rotulador/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/TractorTom/rotulador/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
-The goal of **TBox** is to provide a tools to help developers and producers manipulate R objects and outputs.
+The goal of **rotulador** is to provide a tools to help developers and producers manipulate R objects and outputs.
 
 ## Installation
 
-You can install the development version of TBox from [GitHub](https://github.com/) with:
+You can install the development version of rotulador from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("TanguyBarthelemy/TBox")
+remotes::install_github("TractorTom/rotulador")
 ```
 
 ## Example

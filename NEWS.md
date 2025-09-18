@@ -8,6 +8,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-09-18
+
+
 ### Changed
 
 * Rename **{TBox}** in **{rotulador}**
@@ -102,7 +105,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 * new function `render_code` to render some code on-the-fly to produce PDF, HTML, word and other format quickly by using the clickboard
 
 
-[Unreleased]: https://github.com/TractorTom/rotulador/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/TractorTom/rotulador/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/TractorTom/rotulador/compare/v0.2.2...v1.0.0
 [0.2.2]: https://github.com/TractorTom/rotulador/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/TractorTom/rotulador/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/TractorTom/rotulador/compare/v0.1.3...v0.2.0

@@ -47,12 +47,12 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="rotulador-useful-toolbox-with-random-programs">rotulador: useful toolbox with random programs<a class="anchor" aria-label="anchor" href="#rotulador-useful-toolbox-with-random-programs"></a>
+<div class="page-header"><h1 id="rotulador">{rotulador}<a class="anchor" aria-label="anchor" href="#rotulador"></a>
 </h1></div>
 <!-- badges: start -->
 
 <p><a href="https://github.com/TractorTom/rotulador/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/TractorTom/rotulador/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://app.codecov.io/gh/TractorTom/rotulador?branch=main" class="external-link"><img src="https://codecov.io/gh/TractorTom/rotulador/branch/main/graph/badge.svg" alt="Test coverage"></a> <a href="https://www.codefactor.io/repository/github/tractortom/rotulador/overview/main" class="external-link"><img src="https://www.codefactor.io/repository/github/tractortom/rotulador/badge/main" alt="CodeFactor"></a> <a href="https://github.com/TractorTom/rotulador/actions/workflows/lint.yaml" class="external-link"><img src="https://github.com/TractorTom/rotulador/actions/workflows/lint.yaml/badge.svg" alt="lint"></a> <a href="https://github.com/TractorTom/rotulador/actions/workflows/pkgdown.yaml" class="external-link"><img src="https://github.com/TractorTom/rotulador/actions/workflows/pkgdown.yaml/badge.svg" alt="GH Pages built"></a> <!-- badges: end --></p>
-<p>The goal of <strong>rotulador</strong> is to provide tool to help developers and producers manipulate R objects and outputs.</p>
+<p>The goal of <strong>{rotulador}</strong> is to provide functions for programming and generating documents in R. It’s a tools to help developers and producers manipulate R objects and outputs.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -64,6 +64,13 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
+<p>Formatage de code pour inclusion dans un rapport :</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/TractorTom/rotulador" class="external-link">"rotulador"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">code</span> <span class="op">&lt;-</span> <span class="st">"x &lt;- 1:10\nmean(x)"</span></span>
+<span><span class="fu">clipr</span><span class="fu">::</span><span class="fu"><a href="http://matthewlincoln.net/clipr/reference/write_clip.html" class="external-link">write_clip</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/render_code.html">render_code</a></span><span class="op">(</span><span class="va">code</span>, format <span class="op">=</span> <span class="st">"html"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

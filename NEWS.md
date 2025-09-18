@@ -8,8 +8,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [0.2.2] - 2025-04-29
+### Changed
 
+* Rename {TBox} in {rotulador}
+
+
+## [0.2.2] - 2025-04-29
 
 ### Fixed
 
@@ -19,7 +23,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Changed
 
 * The rendering calls new Pandoc args for PDF and use the word template for word
-* Rename {TBox} in {rotulador}
+
 
 ### Added
 

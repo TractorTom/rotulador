@@ -1,4 +1,3 @@
-
 #' @title Lecture des fichiers de donnée
 #'
 #' @description

@@ -1,4 +1,3 @@
-
 #' @title The latex engine
 #'
 #' @description
@@ -53,14 +52,22 @@ get_latex_engine <- function() {
 #' create_preamble_tex(font_size = 18.0)
 #'
 create_preamble_tex <- function(
-        font_size = 12.0,
-        monofont_path = get_fira_path()) {
-
+    font_size = 12.0,
+    monofont_path = get_fira_path()
+) {
     # Check
-    checkmate::assert_number(x = font_size, lower = 1L, na.ok = FALSE,
-                             null.ok = FALSE, finite = TRUE)
-    monofont_path <- normalizePath(monofont_path, winslash = "/",
-                                   mustWork = TRUE)
+    checkmate::assert_number(
+        x = font_size,
+        lower = 1L,
+        na.ok = FALSE,
+        null.ok = FALSE,
+        finite = TRUE
+    )
+    monofont_path <- normalizePath(
+        monofont_path,
+        winslash = "/",
+        mustWork = TRUE
+    )
 
     latex_engine <- get_latex_engine()
     preamble_tex <- paste0("\\fontsize{", font_size, "}{", font_size, "}")
@@ -71,7 +78,10 @@ create_preamble_tex <- function(
             preamble_tex,
             paste0(
                 "\\setmonofont[ExternalLocation=",
-                font_dir, "/]{", font_file, "}"
+                font_dir,
+                "/]{",
+                font_file,
+                "}"
             ),
             "\\makeatletter",
             "\\def\\verbatim@nolig@list{}",
@@ -100,8 +110,12 @@ create_preamble_tex <- function(
 #' get_fira_path()
 #'
 get_fira_path <- function() {
-    fira_path <- system.file("extdata", "FiraCode", "FiraCode-Regular.ttf",
-                             package = "rotulador")
+    fira_path <- system.file(
+        "extdata",
+        "FiraCode",
+        "FiraCode-Regular.ttf",
+        package = "rotulador"
+    )
     fira_path <- normalizePath(fira_path, winslash = "/", mustWork = FALSE)
     return(fira_path)
 }
@@ -124,11 +138,16 @@ get_fira_path <- function() {
 #' get_word_template_path()
 #'
 get_word_template_path <- function() {
-    word_template_path <- system.file("extdata", "template.docx",
-                                      package = "rotulador")
-    word_template_path <- normalizePath(word_template_path,
-                                        winslash = "/",
-                                        mustWork = FALSE)
+    word_template_path <- system.file(
+        "extdata",
+        "template.docx",
+        package = "rotulador"
+    )
+    word_template_path <- normalizePath(
+        word_template_path,
+        winslash = "/",
+        mustWork = FALSE
+    )
     return(word_template_path)
 }
 
@@ -173,19 +192,25 @@ generate_chunk_header <- function(...) {
     # Check additionnal argument as knitr options
     checkmate::assert_character(
         x = names(additional_args),
-        unique = TRUE, null.ok = TRUE
+        unique = TRUE,
+        null.ok = TRUE
     )
     vapply(
         X = names(additional_args),
-        FUN =  checkmate::assert_choice,
+        FUN = checkmate::assert_choice,
         choices = names(knitr::opts_chunk[["get"]]()),
         FUN.VALUE = character(1L)
     )
 
     yaml_inter <- ifelse(
         test = length(additional_args) > 0L,
-        yes = paste(",", names(additional_args),
-                    "=", additional_args, collapse = ""),
+        yes = paste(
+            ",",
+            names(additional_args),
+            "=",
+            additional_args,
+            collapse = ""
+        ),
         no = ""
     )
 
@@ -238,17 +263,26 @@ generate_chunk_header <- function(...) {
 #'                   echo = TRUE)
 #'
 generate_rmd_file <- function(
-        content,
-        output_format = c("word", "pdf", "html",
-                          "word_document", "pdf_document", "html_document"),
-        code = TRUE,
-        ...) {
-
+    content,
+    output_format = c(
+        "word",
+        "pdf",
+        "html",
+        "word_document",
+        "pdf_document",
+        "html_document"
+    ),
+    code = TRUE,
+    ...
+) {
     output_format <- match.arg(output_format)
-    output_format <- gsub(x = output_format,
-                          pattern = "_document$",
-                          replacement = "",
-                          perl = TRUE, fixed = FALSE)
+    output_format <- gsub(
+        x = output_format,
+        pattern = "_document$",
+        replacement = "",
+        perl = TRUE,
+        fixed = FALSE
+    )
 
     # Check content
     checkmate::assert_character(content)
@@ -360,33 +394,53 @@ generate_rmd_file <- function(
 #' )
 #' }
 render_code <- function(
-        output_format = c("word", "pdf", "html",
-                          "word_document", "pdf_document", "html_document"),
-        browser = getOption("browser"),
-        font_size = 12.0,
-        code = TRUE,
-        open = TRUE,
-        monofont_path = get_fira_path(),
-        word_template_path = get_word_template_path(),
-        ...) {
-
+    output_format = c(
+        "word",
+        "pdf",
+        "html",
+        "word_document",
+        "pdf_document",
+        "html_document"
+    ),
+    browser = getOption("browser"),
+    font_size = 12.0,
+    code = TRUE,
+    open = TRUE,
+    monofont_path = get_fira_path(),
+    word_template_path = get_word_template_path(),
+    ...
+) {
     if (!clipr::clipr_available()) {
         return(clipr::dr_clipr())
     }
 
     # Check
-    checkmate::assert_number(x = font_size, lower = 1L, na.ok = FALSE,
-                             null.ok = FALSE, finite = TRUE)
-    monofont_path <- normalizePath(monofont_path, winslash = "/",
-                                   mustWork = TRUE)
-    word_template_path <- normalizePath(word_template_path, winslash = "/",
-                                        mustWork = TRUE)
+    checkmate::assert_number(
+        x = font_size,
+        lower = 1L,
+        na.ok = FALSE,
+        null.ok = FALSE,
+        finite = TRUE
+    )
+    monofont_path <- normalizePath(
+        monofont_path,
+        winslash = "/",
+        mustWork = TRUE
+    )
+    word_template_path <- normalizePath(
+        word_template_path,
+        winslash = "/",
+        mustWork = TRUE
+    )
 
     output_format <- match.arg(output_format)
-    output_format <- gsub(x = output_format,
-                          pattern = "_document$",
-                          replacement = "",
-                          perl = TRUE, fixed = FALSE)
+    output_format <- gsub(
+        x = output_format,
+        pattern = "_document$",
+        replacement = "",
+        perl = TRUE,
+        fixed = FALSE
+    )
 
     checkmate::assert_logical(code)
     checkmate::assert_logical(open)
@@ -411,7 +465,7 @@ render_code <- function(
         write(preamble_tex, file = preamble_file)
     }
     if (output_format == "html") {
-        style_file <-  system.file("extdata", "style.css", package = "rotulador")
+        style_file <- system.file("extdata", "style.css", package = "rotulador")
         style_file <- normalizePath(style_file, winslash = "/", mustWork = TRUE)
     }
 

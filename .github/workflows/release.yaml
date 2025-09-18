@@ -46,12 +46,15 @@ jobs:
         id: set-tag
         run: |
           library("releaser")
-          possible_tags <- paste0("v", get_different_future_version(path = "."))
+          library("desc")
+          
+          current_version <- desc_get_version(file = ".")
+          possible_tags <- paste0("v", get_different_future_version(version = current_version))
 
           tag <- Sys.getenv("tag")
 
           if (!startsWith(tag, "v")) tag <- paste0("v", tag)
-          if (!tag %in% possible_tags) stop("Invalid tag. Possible tags:", toString(possible_tags))
+          if (!tag %in% as.character(possible_tags)) stop("Invalid tag. Possible tags:", toString(possible_tags))
 
           system(paste0("echo \"tag=", tag, "\" >> \"$GITHUB_OUTPUT\""))
         shell: Rscript {0}

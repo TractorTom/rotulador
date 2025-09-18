@@ -39,7 +39,7 @@ jobs:
       - name: Install R dependencies
         run: |
           install.packages("remotes")
-          remotes::install_github("TractorTom/releaser")
+          remotes::install_github("TanguyBarthelemy/releaser")
         shell: Rscript {0}
 
       - name: Check tag

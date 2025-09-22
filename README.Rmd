@@ -38,10 +38,10 @@ You can install the development version of rotulador from [GitHub](https://githu
 remotes::install_github("TractorTom/rotulador")
 ```
 
+
 ## Example
 
-
-Formatage de code pour inclusion dans un rapport :
+Formating code top include in a document:
 
 ```{r, eval = FALSE}
 library("rotulador")

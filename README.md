@@ -33,7 +33,7 @@ remotes::install_github("TractorTom/rotulador")
 
 ## Example
 
-Formatage de code pour inclusion dans un rapport :
+Formating code top include in a document:
 
 ``` r
 library("rotulador")

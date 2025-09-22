@@ -1,4 +1,6 @@
 linters: all_linters(
-    line_length_linter(120),
-    nzchar_linter = NULL
+    line_length_linter(80),
+    indentation_linter(indent = 4),
+    return_linter = NULL
   )
+encoding: "UTF-8"

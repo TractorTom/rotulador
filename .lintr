@@ -1,6 +1,6 @@
 linters: all_linters(
-    line_length_linter(80),
-    indentation_linter(indent = 4),
+    line_length_linter(80L),
+    indentation_linter(indent = 4L),
     return_linter = NULL
   )
 encoding: "UTF-8"

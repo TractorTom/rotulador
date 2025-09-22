@@ -29,6 +29,7 @@ knitr::opts_chunk$set(
 
 The goal of **{rotulador}** is to provide functions for programming and generating documents in R. It's a tools to help developers and producers manipulate R objects and outputs.
 
+
 ## Installation
 
 You can install the development version of rotulador from [GitHub](https://github.com/) with:

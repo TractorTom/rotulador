@@ -1,6 +1,6 @@
 # Changelog
 
-## rotulador 1.0.0.9000
+## rotulador 1.0.0
 
 All notable changes to this project will be documented in this file.
 

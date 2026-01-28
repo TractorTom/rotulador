@@ -30,3 +30,4 @@ cran-comments.md
 ^codecov\.yml$
 
 ^air\.toml$
+^cran-comments\.md$

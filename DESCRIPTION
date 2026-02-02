@@ -1,6 +1,6 @@
 Package: rotulador
 Title: Useful Functions for Programming and Generating Documents
-Version: 1.0.0
+Version: 1.0.0.9000
 Authors@R: 
     person("Tanguy", "Barthelemy", , "tangbarth@hotmail.fr", role = c("aut", "cre"))
 Description: Tools to help developers and producers manipulate R objects

@@ -11,6 +11,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.0] - 2025-09-18
 
+### Added
+
+* First CRAN release !
+
 ### Changed
 
 * Rename **{TBox}** in **{rotulador}**

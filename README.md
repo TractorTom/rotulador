@@ -23,7 +23,15 @@ manipulate R objects and outputs.
 
 ## Installation
 
-You can install the development version of rotulador from
+🎉 {rotulador} is now available on CRAN! 🎉
+
+To install it, you have to launch the following command line:
+
+``` r
+install.packages("rotulador")
+```
+
+You can install the development version of {rotulador} from
 [GitHub](https://github.com/) with:
 
 ``` r

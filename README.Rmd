@@ -32,7 +32,14 @@ The goal of **{rotulador}** is to provide functions for programming and generati
 
 ## Installation
 
-You can install the development version of rotulador from [GitHub](https://github.com/) with:
+🎉 {rotulador} is now available on CRAN! 🎉
+
+To install it, you have to launch the following command line:
+```{r, eval = FALSE}
+install.packages("rotulador")
+```
+
+You can install the development version of {rotulador} from [GitHub](https://github.com/) with:
 
 ```{r, eval = FALSE}
 # install.packages("remotes")

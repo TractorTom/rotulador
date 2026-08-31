@@ -5,6 +5,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             condition = cond_skip_clipr,
             message = "{clipr} not configured."
         )
+        testthat::skip_on_cran()
 
         clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
         path_rmd <- file.path(render_code(eval = FALSE), "template.Rmd")
@@ -52,6 +53,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             condition = cond_skip_clipr,
             message = "{clipr} not configured."
         )
+        testthat::skip_on_cran()
 
         clipr::write_clip("plot(AirPassengers)", allow_non_interactive = TRUE)
         path_rmd <- file.path(render_code(eval = FALSE), "template.Rmd")
@@ -104,6 +106,7 @@ withr::with_envvar(new = c(CLIPR_ALLOW = TRUE), {
             condition = cond_skip_clipr,
             message = "{clipr} not configured."
         )
+        testthat::skip_on_cran()
 
         clipr::write_clip(
             content = "print(AirPassengers)
@@ -154,6 +157,7 @@ print(mtcars)",
             condition = cond_skip_clipr,
             message = "{clipr} not configured."
         )
+        testthat::skip_on_cran()
 
         clipr::write_clip(
             content = "print(AirPassengers)

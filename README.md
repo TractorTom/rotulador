@@ -35,8 +35,8 @@ You can install the development version of {rotulador} from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("TractorTom/rotulador")
+# install.packages("pak")
+pak::pak("TractorTom/rotulador")
 ```
 
 ## Example
